@@ -1,0 +1,81 @@
+{
+  "post": "2026-09-08-homepage-first-impression.md",
+  "topic_id": "13",
+  "generated_at": "2026-09-08T17:41:43.612Z",
+  "facts_last_verified": "2026-08-31",
+  "research": {
+    "needed": false,
+    "skipped_reason": "Topic does not require outside facts. Use first-party facts, opinion, and hypotheticals only.",
+    "queries": [],
+    "retrieved_at": "2026-09-08T17:40:16.297Z"
+  },
+  "sources": [],
+  "allowed_claims": [],
+  "claim_tokens_used": [],
+  "approved_first_party_numbers": {
+    "money": [
+      0.19,
+      4.02,
+      400,
+      500,
+      600,
+      750,
+      1500,
+      2000,
+      3500,
+      5000,
+      10000
+    ],
+    "percents": [
+      15,
+      95
+    ],
+    "counts": [
+      2,
+      12,
+      13,
+      37,
+      74,
+      250,
+      968,
+      1963,
+      72309
+    ],
+    "timelines": [
+      "2–4 weeks",
+      "30 days"
+    ]
+  },
+  "claims": [
+    {
+      "claim": "A homepage must answer what you do, who you help, and how to get started within the first seconds of a visit or visitors leave.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "Visitors scan crowded pages rather than reading them; a clear above-the-fold section with one primary action outperforms a cluttered one.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "On mobile, phone numbers should be tap-to-call links; a plain-text number creates friction for a visitor who is ready to call.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "A homepage that requires scrolling to answer the three core questions is likely costing the business calls and inquiries.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "If a homepage's layout is fundamentally wrong, rewriting the headline alone will not fix the conversion problem; a structural rebuild may be needed.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "Brandible's custom website projects typically run $2,000 to $10,000+ based on scope; that is Brandible's range, not a national average.",
+      "kind": "first_party"
+    },
+    {
+      "claim": "If traffic is reaching a site and calls aren't happening, the problem may be the site itself rather than traffic volume.",
+      "kind": "hypothetical"
+    }
+  ],
+  "repairs": [],
+  "internal_links_catalog_note": "Internal URLs in the article must come from the approved catalog of live posts, services, and core pages."
+}

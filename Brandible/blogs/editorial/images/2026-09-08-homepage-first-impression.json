@@ -1,0 +1,38 @@
+{
+  "source_post_path": "Brandible/blogs/posts/2026-09-08-homepage-first-impression.md",
+  "slug": "homepage-first-impression",
+  "visual_brief": {
+    "thesis": "A website homepage must deliver immediate clarity within seconds, cutting through noise to focus on a singular core offering before visitor attention fades.",
+    "subject": "A matte dark navy rectangular sculpture resembling a framed display panel, featuring a central illuminated orange lens that projects a clean, immediate beam of crisp light.",
+    "composition": "Centered, single focal subject on a dark reflective surface with generous dark negative space on all sides. Shallow depth of field focusing sharply on the lit central prism.",
+    "mood": "Quiet, precise, focused, and tactile.",
+    "avoid": [
+      "text",
+      "headlines",
+      "typography",
+      "logos",
+      "fake UI",
+      "browser windows",
+      "stopwatches",
+      "clocks",
+      "people",
+      "handshakes",
+      "laptops"
+    ],
+    "color_notes": "Deep navy field (#0A1633, #060D1F) background. Warm orange accent (#F97316) illuminating the central lens. Subtle electric blue (#2563EB) highlight along the outer frame edge. Cool cloud light (#F5F7FA) in the projected beam.",
+    "center_safe": "The frame object and its light central aperture are concentrated strictly within the central 60% of the canvas to remain fully visible during 16:10 cropping."
+  },
+  "final_generation_prompt": "Create one original Brandible blog featured image.\nQuiet tactile still-life. Slightly 3D physical objects. Matte materials. Soft directional light.\nNavy field (#0A1633 / #060D1F) with orange accent (#F97316). Electric blue only sparingly.\nNo typography. No logos. No fake UI. No stock photography tropes.\nGenerate as a 2K 16:9 landscape. Important subject stays in the center 70% horizontally and vertically, with breathing room on every edge, because the image will later be cropped to 16:10.\nThesis: A website homepage must deliver immediate clarity within seconds, cutting through noise to focus on a singular core offering before visitor attention fades.\nSubject: A matte dark navy rectangular sculpture resembling a framed display panel, featuring a central illuminated orange lens that projects a clean, immediate beam of crisp light.\nComposition: Centered, single focal subject on a dark reflective surface with generous dark negative space on all sides. Shallow depth of field focusing sharply on the lit central prism.\nMood: Quiet, precise, focused, and tactile.\nColor: Deep navy field (#0A1633, #060D1F) background. Warm orange accent (#F97316) illuminating the central lens. Subtle electric blue (#2563EB) highlight along the outer frame edge. Cool cloud light (#F5F7FA) in the projected beam.\nCenter-safe: The frame object and its light central aperture are concentrated strictly within the central 60% of the canvas to remain fully visible during 16:10 cropping.\nDo not appear:\n- readable text, headlines, captions, watermarks, or typography\n- Brandible logo, wordmark, or letter B\n- fake Google, Meta, Ads, or Search UI and readable screenshots\n- generic corporate stock: handshakes, laptops on white desks, smiling teams\n- cyberpunk, cartoon, or glossy AI-glass people\n- text\n- headlines\n- typography\n- logos\n- fake UI\n- browser windows\n- stopwatches\n- clocks\n- people\n- handshakes\n- laptops\nOutput the image only. Do not render words in the picture.",
+  "provider": "gemini",
+  "model": "gemini-3.1-flash-image",
+  "generated_at": "2026-09-08T17:42:10.119Z",
+  "generation_mode": "new",
+  "regeneration_notes": null,
+  "final_dimensions": {
+    "width": 1920,
+    "height": 1200
+  },
+  "final_byte_size": 21092,
+  "final_image_path": "Brandible/assets/blog-images/homepage-first-impression.webp",
+  "licensing": "Original AI-generated imagery created under the provider's API terms, with generation provenance recorded."
+}
