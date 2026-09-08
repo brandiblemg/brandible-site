@@ -1,15 +1,15 @@
 ---
-draft: true
-title: "Your Homepage Has About Five Seconds. Here's What It Has to Say"
+draft: false
+title: "Your Homepage Needs to Make Sense Fast. Here's What It Has to Say"
 slug: "homepage-first-impression"
 date: 2026-09-08T17:41:43.611Z
 author: "Brandible Team"
-meta_title: "What Your Homepage Has to Say in the First Five Seconds"
-meta_description: "If a visitor can't tell what you do, who you help, and how to get started in seconds, they leave. Here's how to check your homepage against that test."
+meta_title: "What Your Homepage Needs to Say Right Away"
+meta_description: "If a visitor can't quickly tell what you do, who you help, and how to get started, you risk losing them. Here's how to put your homepage to the test."
 excerpt: "A homepage that looks fine but doesn't answer the right questions fast enough is costing you calls. Here's a simple way to audit what yours is actually saying."
 category: "Web Design"
 featured_image: /assets/blog-images/homepage-first-impression.webp
-featured_image_alt: "A matte dark navy rectangular sculpture resembling a framed display panel, featuring a central illuminated orange lens that projects a clean, immediate beam of crisp light."
+featured_image_alt: "Dark navy display panel with an orange light representing a website's first impression."
 ---
 
 Someone lands on your homepage. They didn't call you, they didn't get a referral yet, they're just checking. They want to know if you're worth a few more minutes of their time.
@@ -26,13 +26,13 @@ There are three things a visitor needs to know within the first few seconds. If 
 
 Not your company name. Not a tagline about being "passionate about excellence." What, specifically, do you offer? Roofing. Physical therapy. Bookkeeping. Estate planning. Tax prep for freelancers.
 
-If a stranger can't read that off your homepage in under ten seconds, it's not there clearly enough.
+If a stranger can't read that off your homepage quickly, it's not there clearly enough.
 
 **Who do you help?**
 
 "Businesses and individuals" is not an answer. The more specific you are, the more the right people feel like you're talking to them. Homeowners in Hunterdon County. Small medical practices. New Jersey restaurants. Residential landlords.
 
-You're not narrowing your market by being specific. You're making the right people lean in.
+Being specific doesn't mean turning everyone else away. It means making it obvious to your ideal customer that they're in the right place.
 
 **How do they get started?**
 
@@ -48,7 +48,7 @@ Can you answer all three questions from what's visible before you scroll?
 
 What you do, who you help, how to get started. If the answer to any of those is "you'd have to keep reading," that's the problem.
 
-The phone test matters because a lot of visitors arrive on a screen smaller than your hand. If your headline is cropped, your phone number requires scrolling, or your navigation stacks into a broken hamburger menu, the impression you're making is not the one you think.
+The phone test matters because plenty of potential customers will visit your site from their phone. If your headline gets cut off, your phone number requires scrolling, or the mobile menu doesn't work properly, you're creating friction before they've even had a chance to consider you.
 
 Now do the same test on a laptop. Same questions. Same standard.
 
@@ -64,7 +64,7 @@ A link buried in a paragraph isn't a CTA. Neither is a "learn more" button that 
 
 **The phone number isn't clickable.**
 
-If your number is in a graphic or written as plain text that doesn't open the dialer, you've just created friction for someone who is ready to call. On mobile, every phone number should be a tap-to-call link. This one takes five minutes to fix.
+If your number is in a graphic or written as plain text that doesn't open the dialer, you've just created friction for someone who is ready to call. On mobile, every phone number should be a tap-to-call link. This is a quick fix.
 
 **The above-the-fold section tries to do too much.**
 
@@ -76,11 +76,11 @@ A review, a recognizable client name, a specific result, a number of jobs comple
 
 ## What a Working Homepage Actually Looks Like
 
-You land on it. In a few seconds you know: this company does residential HVAC in Central New Jersey, they've been doing it since 2011, you can book online or call the number right at the top, and there are a dozen reviews that all say the same thing about showing up on time.
+You land on the homepage. Within a few seconds, you know they handle residential HVAC in Central New Jersey. You can book online or call the number at the top. Right below that, you see reviews from homeowners they've worked with.
 
-You don't have to dig for any of it. You already know enough to pick up the phone.
+You don't have to dig for any of it. You already know enough to decide whether they're worth calling.
 
-That's the standard. Clear, specific, and easy to act on. Not beautiful in a design-award way. Useful in a "I'm calling this person" way.
+That's the standard. Clear, specific, and easy to act on. Not beautiful in a design-award way. Useful in an "I'm calling this person" way.
 
 ## When a Patch Won't Fix It
 
