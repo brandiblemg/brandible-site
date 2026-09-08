@@ -1,17 +1,21 @@
 ---
 draft: false
-title: "Your Homepage Needs to Make Sense Fast. Here's What It Has to Say"
-slug: "homepage-first-impression"
+title: Your Homepage Needs to Make Sense Fast. Here's What It Has to Say
+slug: homepage-first-impression
 date: 2026-09-08T17:41:43.611Z
-author: "Brandible Team"
-meta_title: "What Your Homepage Needs to Say Right Away"
-meta_description: "If a visitor can't quickly tell what you do, who you help, and how to get started, you risk losing them. Here's how to put your homepage to the test."
-excerpt: "A homepage that looks fine but doesn't answer the right questions fast enough is costing you calls. Here's a simple way to audit what yours is actually saying."
-category: "Web Design"
+author: Brandible Team
+meta_title: What Your Homepage Needs to Say Right Away
+meta_description: If a visitor can't quickly tell what you do, who you help, and
+  how to get started, you risk losing them. Here's how to put your homepage to
+  the test.
 featured_image: /assets/blog-images/homepage-first-impression.webp
-featured_image_alt: "Dark navy display panel with an orange light representing a website's first impression."
+featured_image_alt: Dark navy display panel with an orange light representing a
+  website's first impression.
+excerpt: A homepage that looks fine but doesn't answer the right questions fast
+  enough is costing you calls. Here's a simple way to audit what yours is
+  actually saying.
+category: Web Design
 ---
-
 Someone lands on your homepage. They didn't call you, they didn't get a referral yet, they're just checking. They want to know if you're worth a few more minutes of their time.
 
 If the page doesn't answer that fast, they're gone.
@@ -92,7 +96,7 @@ If you've already tried fixing the words and the phone still doesn't ring, the p
 
 That's when a rebuild, not a refresh, is the conversation worth having.
 
-Brandible's web design work starts at diagnosing what the site is actually doing. If what you need is a custom site, our projects typically run $2,000 to $10,000+. That's our range, based on scope. If you need a simple page you can update yourself, we're probably not the fit. But if traffic is reaching the site and calls aren't happening, that's a solvable problem.
+Brandible's web design work starts at diagnosing what the site is actually doing. If what you need is a custom site, our projects typically run $2,000 to $10,000+. That's our range, based on scope. If all you need is a basic DIY site, you may not need us. If you need a site built around your business, your customers, and your goals, that’s a different conversation. But if traffic is reaching the site and calls aren't happening, that's a solvable problem.
 
 [See how we approach web design →](/services/web-design/)
 
