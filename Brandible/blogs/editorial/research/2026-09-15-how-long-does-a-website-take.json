@@ -1,0 +1,102 @@
+{
+  "post": "2026-09-15-how-long-does-a-website-take.md",
+  "topic_id": "08",
+  "generated_at": "2026-09-15T17:51:30.351Z",
+  "facts_last_verified": "2026-08-31",
+  "research": {
+    "needed": false,
+    "skipped_reason": "Topic does not require outside facts. Use first-party facts, opinion, and hypotheticals only.",
+    "queries": [],
+    "retrieved_at": "2026-09-15T17:50:01.392Z"
+  },
+  "sources": [],
+  "allowed_claims": [],
+  "claim_tokens_used": [],
+  "approved_first_party_numbers": {
+    "money": [
+      0.19,
+      4.02,
+      400,
+      500,
+      600,
+      750,
+      1500,
+      2000,
+      3500,
+      5000,
+      10000
+    ],
+    "percents": [
+      15,
+      95
+    ],
+    "counts": [
+      2,
+      12,
+      13,
+      37,
+      74,
+      250,
+      968,
+      1963,
+      72309
+    ],
+    "timelines": [
+      "2–4 weeks",
+      "30 days"
+    ]
+  },
+  "claims": [
+    {
+      "claim": "Brandible's custom websites typically launch in 2–4 weeks from kickoff to go-live.",
+      "kind": "first_party"
+    },
+    {
+      "claim": "Brandible web design projects typically run $2,000 to $10,000+, depending on scope.",
+      "kind": "first_party"
+    },
+    {
+      "claim": "Landing pages can move faster than the 2–4 week range; stores, booking systems, or complex sites take longer.",
+      "kind": "first_party"
+    },
+    {
+      "claim": "Delays in most website projects come from copy, photos, and feedback not being ready on the client side, not from the build itself.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "Starting a project without copy, photos, or a clear message ready almost always extends the timeline beyond what the owner expected.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "A site with real photos of your work, team, or space performs better than one filled with stock imagery.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "Spending time on your message before a project starts reduces revision time once the site is being built.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "A hypothetical landing page for one service with a contact page, booking form, and clear call to action can sometimes move faster than the 2–4 week range.",
+      "kind": "hypothetical"
+    },
+    {
+      "claim": "A hypothetical full site with multiple service categories, a quote form, photo galleries, and scheduling integrations is a different scope than a landing page, though still not a six-month project.",
+      "kind": "hypothetical"
+    }
+  ],
+  "repairs": [
+    {
+      "round": 1,
+      "code": "V3_SOURCE_ENTAILMENT",
+      "action": "deleted_segment",
+      "reason": "unsupported comparative"
+    },
+    {
+      "round": 1,
+      "code": "V10_OTHER",
+      "action": "normalized_em_dash",
+      "reason": "em dash"
+    }
+  ],
+  "internal_links_catalog_note": "Internal URLs in the article must come from the approved catalog of live posts, services, and core pages."
+}
