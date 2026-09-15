@@ -1,92 +1,92 @@
 ---
-draft: true
+draft: false
 title: "How Long a Website Project Actually Takes (and What Slows It Down)"
 slug: "how-long-does-a-website-take"
 date: 2026-09-15T17:51:30.350Z
 author: "Brandible Team"
 meta_title: "How Long Does a Website Project Actually Take?"
-meta_description: "Brandible's custom websites typically launch in 2–4 weeks. Here's what that timeline covers, and what slows most projects down."
-excerpt: "Most website projects don't run long because the work is complicated. They run long because of what happens between the work. Here's what a realistic timeline looks like, and where the delays actually come from."
+meta_description: "Brandible's custom websites typically launch in 2–4 weeks. Here's what that timeline covers and what can push a website project past it."
+excerpt: "A website build can move quickly when the scope is clear and the inputs are ready. Here's what Brandible's 2–4 week timeline covers, plus the delays that can stretch it."
 category: "Web Design"
 featured_image: /assets/blog-images/how-long-does-a-website-take.webp
-featured_image_alt: "A navy still-life object sits in soft directional light."
+featured_image_alt: "Geometric blocks move along a dark navy track with an orange block paused over a gap."
 ---
 
-You ask an agency how long a website takes and you get one of two answers. Either a shrug ("it depends on your needs"), or a six-month project plan that looks like it was built for a hospital system.
+You ask a web designer how long a website takes and the answer is often some version of "it depends."
 
-Neither of those is useful if you're a local service business that needs to get online and start converting visits into calls.
+Technically true. Not very useful when you're trying to figure out whether you should plan for two weeks or two months.
 
-Here's what a realistic timeline actually looks like, and where most of the delays come from.
+For Brandible, the answer is more specific: most custom site projects land in the 2–4 week range, with scope and project readiness doing most of the moving.
 
-## The honest answer: 2–4 weeks for most sites
+Here's what that range covers, and what can push it out.
 
-Brandible's custom websites typically launch in 2–4 weeks from kickoff to go-live. That's our range, not a promise that ignores what you're building.
+## For Brandible, most custom sites take 2–4 weeks
 
-Landing pages can move faster. Stores, booking systems, or sites with a lot of service pages or integrations will take longer. That's not a bait and switch - it's scope.
+[Brandible's custom websites](/services/web-design/) typically launch in 2–4 weeks from kickoff to go-live. That's our range, not an industry average and not a promise for every scope.
 
-What the timeline covers: discovery and strategy, custom design, mobile-responsive development, SEO-ready structure and metadata, and final review before launch. That's the full job, not a theme dropped on a server.
+Landing pages can move faster. Stores, booking systems, sites with a lot of service pages, or more involved integrations can take longer. That's the difference between a range and a guarantee.
+
+The timeline covers discovery and strategy, custom design, mobile-responsive development, SEO-ready structure and metadata, revisions, final review, and launch prep. The point is to move quickly without skipping the work.
 
 ## What Brandible controls vs what you control
 
-The 2–4 weeks assumes an active project on both sides.
+That 2–4 week range assumes the project stays active on both sides.
 
-On Brandible's end: design, development, revisions, technical setup, and launch prep. We move quickly because this isn't a side project queued behind a hundred other clients.
+On Brandible's end: design, development, revisions, technical setup, and launch prep. We keep projects moving by scoping the work clearly and keeping the build active.
 
 On your end: copy, photos, feedback, and decisions.
 
-That's where most timelines stretch.
+If the copy isn't ready, sections stay in limbo. If photos are coming later, we either launch with placeholders or wait. If feedback comes in one line at a time over several days, each revision cycle gets longer.
 
-If the copy isn't ready when the build starts, the build waits. If the photos are "coming from the photographer next month," the site goes live without them or waits. If rounds of feedback take a week each, a two-week project becomes a six-week project with no one to blame.
+None of that means the client is "the problem." It just means a website needs inputs. The clearer those inputs are at kickoff, the easier it is to keep the project on schedule.
 
-This isn't a knock on clients. It's just the reality of how a website gets built. The design can't be finished without the words. The words can't be placed without a decision on the message.
+## Three things that can stall a website project
 
-## The three things that stall almost every project
+**Copy.** Copy is easy to underestimate. You need clear, specific language about what you do, who you help, and why someone should choose you. Rough notes are fine if they give us something to work from. If the message itself still needs to be figured out, build time for that into the project.
 
-**Copy.** This is the most common one. A lot of business owners underestimate how long it takes to write clear, specific content about what they do, who they help, and why someone should call them instead of a competitor. If you don't have it when we start, we can help - but that's additional work, and it adds time.
+**Photos.** If the site needs project photos, team shots, product images, or pictures of your space, start gathering them before kickoff. If your photographer isn't available until the build is already underway, the timeline may need to move with them.
 
- If your photographer isn't available until the project is already underway, the timeline moves. If you're gathering photos yourself, start before kickoff.
-
-**Feedback and decisions.** When you have revision notes, send them together. A site that needs three rounds of single-line feedback emails takes longer than one where the client sends a consolidated list. That's not about being difficult - it's about keeping the momentum going.
+**Feedback and decisions.** When you have revision notes, send them together. A consolidated list is easier to work through than a trail of one-line emails sent over several days. It keeps the project moving and makes each revision round more useful.
 
 ## Landing pages vs full builds
 
 Not every project is the same scope.
 
-A focused landing page for one service - say, a contact page, a booking form, and a clear call to action - can sometimes move faster than the 2–4 week range. That's a narrower job.
+A focused landing page for one service with a simple contact or booking form can sometimes move faster than the 2–4 week range. That's a narrower job.
 
-A full site for a service business with multiple service categories, a quote form, photo galleries, and integrations to a scheduling tool is a different scope. It's still not a six-month project, but it's not done in a week either.
+A full site for a service business with multiple service categories, a quote form, photo galleries, and scheduling integrations is a different scope. That can push the project past the 2–4 week range, and that's fine. It's simply a bigger build.
 
-What changes the range: the number of pages, whether there's e-commerce or booking, how much content needs to be written, and how complex the integrations are. A scoping conversation before you start will give you an honest answer for your specific site, not a generic one.
+What changes the range: the number of pages, whether there's e-commerce or booking, how much content needs to be written, and how complex the integrations are. A scoping conversation before you start gives you an answer for your actual site instead of a generic timeline.
 
 ## What ready looks like
 
-You don't need everything perfect on day one. But starting a project with none of the inputs ready almost always means a longer timeline than you wanted.
+You don't need everything perfect on day one. But starting with the main inputs ready makes it much easier to stay on schedule.
 
 Here's what makes a project move:
 
-- A clear picture of what the site needs to do (get calls, take bookings, sell products, show your work)
-- Rough copy or notes you can build from, even if it needs to be cleaned up
-- Photos you own or can get quickly, even phone photos as placeholders
+- A clear picture of what the site needs to do, whether that's get calls, take bookings, sell products, or show your work
+- Rough copy or notes we can build from, even if they need to be cleaned up
+- Photos you own or can get quickly, even phone photos as temporary placeholders
 - One person on your side who can make decisions and respond within a day or two
 
-If you have those, the 2–4 week range is realistic. If you're still figuring out what the site should say, that's fine - but factor it into your expectations.
+If you have those, the 2–4 week range is much easier to hit. If you're still figuring out what the site should say, that's fine. Just factor that work into the timeline.
 
-## A faster process doesn't mean a shortcuts process
+## Moving faster doesn't mean cutting corners
 
-Speed matters when it comes from a focused team that isn't stretched thin across a hundred accounts. It doesn't come from skipping the work.
+Speed only matters if the important work is still getting done.
 
-Brandible's sites are built custom. Every project includes design, mobile-responsive development, SEO-ready structure, and a build meant to get calls and bookings - not to check a box.
+Brandible's sites are built custom. Every project includes design, mobile-responsive development, SEO-ready structure, and a build meant to make the next step clear for the people visiting it.
 
-The difference between a six-week project and a two-week project is usually not complexity. It's usually preparation and responsiveness. When both sides are moving, the work moves.
+Preparation and responsiveness can be the difference between a project that stays on schedule and one that drifts. When both sides are moving, the work moves.
 
 ## One thing to check before you contact anyone
 
 Before you start talking to web designers, answer this: do you know what your site needs to say?
 
-Not the tagline. Not the logo colors. What problem do you solve, for whom, and why should someone call you instead of the person below you in the search results?
+Not the tagline. Not the logo colors. What do you sell, who is it for, and why should someone choose you instead of the next business in the search results?
 
-If you can answer that clearly, you're ready to start. If you're still working it out, spend a week on that first. Every hour you spend on your message before the project starts saves two hours of revision once it's built.
+If you can answer that clearly, you're in a good place to start. If you're still working it out, spend some time on the message first. The clearer that is at kickoff, the fewer rounds of back-and-forth you're likely to need later.
 
 ---
 
-If you're ready to move, Brandible's custom site projects typically run $2,000 to $10,000+, depending on scope. That's our range, not a national average. If you need a simple page you can build yourself, we're not the fit. If you need a custom site built to convert visitors into calls - and you want it done in weeks, not months - [see how we approach web design](/services/web-design/) or [book a call to talk through scope](/contact/#book-call).
+Brandible's custom site projects typically run $2,000 to $10,000+ and take about 2–4 weeks, depending on scope. If all you need is a simple page you can update yourself, a full custom build may be more than you need. If you need a site built around your offer, your customers, and a clear next step, [book a call to talk through scope](/contact/#book-call).
