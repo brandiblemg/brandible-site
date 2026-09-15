@@ -1,0 +1,38 @@
+{
+  "source_post_path": "Brandible/blogs/posts/2026-09-15-how-long-does-a-website-take.md",
+  "slug": "how-long-does-a-website-take",
+  "visual_brief": {
+    "thesis": "Website projects move swiftly through clear sequential phases, but are held up by friction, structural gaps, and waiting points between active work.",
+    "subject": "A precision tactile timeline track on a dark matte navy surface with sleek geometric blocks sliding in sequence; a glowing orange modular block sits perfectly suspended over a precise central gap along electric blue guide rails.",
+    "composition": "Centered floating 3D still-life sculpture with generous dark negative space. A single linear track angled gently, keeping the entire block mechanism within the central 70% frame.",
+    "mood": "Quiet, methodical, tactile, and engineered; clean soft directional lighting highlighting material textures.",
+    "avoid": [
+      "text",
+      "headlines",
+      "Brandible logo",
+      "fake UI",
+      "website wireframes",
+      "calendar icons",
+      "clocks",
+      "laptops",
+      "people",
+      "handshakes",
+      "split screen"
+    ],
+    "color_notes": "Deep navy background field (#060D1F and #0A1633). Electric blue (#2563EB) along the track rails. Vibrant warm orange (#F97316) on the focal central block. Cool white (#F5F7FA) directional highlights.",
+    "center_safe": "Subject is compactly centered within the middle 65% horizontal and vertical zone, ensuring all blocks and track mechanisms remain intact during 16:10 and social media center crops."
+  },
+  "final_generation_prompt": "Create one original Brandible blog featured image.\nQuiet tactile still-life. Slightly 3D physical objects. Matte materials. Soft directional light.\nNavy field (#0A1633 / #060D1F) with orange accent (#F97316). Electric blue only sparingly.\nNo typography. No logos. No fake UI. No stock photography tropes.\nGenerate as a 2K 16:9 landscape. Important subject stays in the center 70% horizontally and vertically, with breathing room on every edge, because the image will later be cropped to 16:10.\nThesis: Website projects move swiftly through clear sequential phases, but are held up by friction, structural gaps, and waiting points between active work.\nSubject: A precision tactile timeline track on a dark matte navy surface with sleek geometric blocks sliding in sequence; a glowing orange modular block sits perfectly suspended over a precise central gap along electric blue guide rails.\nComposition: Centered floating 3D still-life sculpture with generous dark negative space. A single linear track angled gently, keeping the entire block mechanism within the central 70% frame.\nMood: Quiet, methodical, tactile, and engineered; clean soft directional lighting highlighting material textures.\nColor: Deep navy background field (#060D1F and #0A1633). Electric blue (#2563EB) along the track rails. Vibrant warm orange (#F97316) on the focal central block. Cool white (#F5F7FA) directional highlights.\nCenter-safe: Subject is compactly centered within the middle 65% horizontal and vertical zone, ensuring all blocks and track mechanisms remain intact during 16:10 and social media center crops.\nDo not appear:\n- readable text, headlines, captions, watermarks, or typography\n- Brandible logo, wordmark, or letter B\n- fake Google, Meta, Ads, or Search UI and readable screenshots\n- generic corporate stock: handshakes, laptops on white desks, smiling teams\n- cyberpunk, cartoon, or glossy AI-glass people\n- text\n- headlines\n- Brandible logo\n- fake UI\n- website wireframes\n- calendar icons\n- clocks\n- laptops\n- people\n- handshakes\n- split screen\nOutput the image only. Do not render words in the picture.",
+  "provider": "gemini",
+  "model": "gemini-3.1-flash-image",
+  "generated_at": "2026-09-15T17:51:57.457Z",
+  "generation_mode": "new",
+  "regeneration_notes": null,
+  "final_dimensions": {
+    "width": 1920,
+    "height": 1200
+  },
+  "final_byte_size": 33348,
+  "final_image_path": "Brandible/assets/blog-images/how-long-does-a-website-take.webp",
+  "licensing": "Original AI-generated imagery created under the provider's API terms, with generation provenance recorded."
+}
