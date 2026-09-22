@@ -361,7 +361,7 @@ function sourceLines(sidecar) {
 
 function repairLines(repairs) {
   if (!Array.isArray(repairs) || repairs.length === 0) {
-    return ['None. First generation passed validation, or no deterministic cleanup was required.'];
+    return ['None. The draft passed validation without deterministic cleanup.'];
   }
   return repairs.map((item) => {
     const code = item.code || 'repair';
@@ -384,7 +384,7 @@ function buildPrBody(payload) {
     `- **Article:** \`${payload.postRel}\``,
     `- **Category:** ${payload.category}`,
     `- **Research:** ${researchStatus}`,
-    '- **Model revision:** None. GitHub automation uses one structured generation plus deterministic cleanup.',
+    '- **Model revision:** Up to one structured revision, only when initial validation fails.',
     `- **Image model:** ${payload.imageModel}`,
     `- **Image:** \`${payload.imageRel}\``,
     `- **Facts verified:** ${payload.factsLastVerified}`,
@@ -457,7 +457,7 @@ function selectTopic(args, topics, occupied) {
 function generatePackage(topic) {
   const created = [];
   try {
-    const draftOut = runNodeScript(path.join(__dirname, 'draft-blog.js'), ['--topic', topic.id, '--deterministic']);
+    const draftOut = runNodeScript(path.join(__dirname, 'draft-blog.js'), ['--topic', topic.id]);
     const postPath = resolveCreatedPath(firstLineMatch(draftOut, /^Wrote (.+)$/m));
     const researchPath = resolveCreatedPath(firstLineMatch(draftOut, /^Research sidecar: (.+)$/m));
     if (!postPath) throw new Error('blog:draft did not report a written post path.');
