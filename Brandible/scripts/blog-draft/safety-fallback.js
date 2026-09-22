@@ -22,6 +22,7 @@ const APPLY_ORDER = [
   'v8_body',
   'v9_body',
   'v9_excerpt',
+  'v7_meta_description',
   'clip_excerpt',
   'deleted_segment',
   'drop_sourced_claim',
@@ -249,6 +250,10 @@ function safeExcerptFromTitle(article) {
   return clipFrontmatterText(text, MAX_EXCERPT_LENGTH);
 }
 
+function safeMetaDescription() {
+  return 'A practical guide to costs, setup, and the questions to answer before making a decision for your business.';
+}
+
 function escapeRegExp(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -322,6 +327,7 @@ function auditFor(repair) {
     v8_body: 'deleted_segment',
     v9_body: 'deleted_segment',
     v9_excerpt: 'rewritten_excerpt',
+    v7_meta_description: 'rewritten_meta_description',
     clip_excerpt: 'shortened_excerpt',
     deleted_segment: 'deleted_segment'
   };
@@ -551,6 +557,15 @@ function repairForProblem(article, problem, options) {
     }
     return deletionRepair('v7_body', problem, sentence, 'raw platform assertion');
   }
+  if (code === 'V7_CLAIM_LEDGER' && /Factual claim in meta_description is not allowed outside a body claim token/i.test(message)) {
+    return {
+      type: 'v7_meta_description',
+      code,
+      action: 'rewritten_meta_description',
+      reason: 'external platform fact is not allowed in meta_description',
+      field: 'meta_description'
+    };
+  }
   if (
     code === 'V7_CLAIM_LEDGER' &&
     /source-only citation|adjacent source-only|immediately restated|giant evidence anchor/i.test(message)
@@ -677,6 +692,12 @@ function applySafetyFallback(article, problems, options) {
     if (repair.type === 'v9_excerpt') {
       next = { ...next, excerpt: safeExcerptFromTitle(next) };
       applied.push('v9_excerpt');
+      audit.push(auditFor(repair));
+      continue;
+    }
+    if (repair.type === 'v7_meta_description') {
+      next = { ...next, meta_description: safeMetaDescription() };
+      applied.push('v7_meta_description');
       audit.push(auditFor(repair));
       continue;
     }
