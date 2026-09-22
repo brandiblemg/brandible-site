@@ -4,7 +4,7 @@ const { toPlainDisplayText, findAllowedClaim } = require('./allowed-claims');
 const { segmentMarkdownSentences, isMarkdownHeading } = require('./segments');
 const { assembleCta, assembleArticle, refreshAssemblyState } = require('./assemble');
 const { validateGeneratedArticle } = require('./validate');
-const { stripMarkdownLinks } = require('./markdown-links');
+const { stripMarkdownLinks, extractMarkdownLinks } = require('./markdown-links');
 
 const MAX_DELETED_SEGMENTS = 6;
 const MAX_DELETED_CHAR_RATIO = 0.2;
@@ -14,6 +14,7 @@ const EM_DASH = '\u2014';
 const CLAIM_TOKEN_RE = /\{\{\s*AC\d+\s*\}\}/;
 const APPLY_ORDER = [
   'v6_replace_token',
+  'split_external_citations',
   'v5_attribute',
   'v1_body',
   'v3_body',
@@ -234,6 +235,22 @@ function limitInternalDestinations(body, maxUnique) {
   });
 }
 
+function splitDenseCitationParagraphs(body) {
+  return String(body || '')
+    .split(/(\n\s*\n)/)
+    .map((part) => {
+      const externalCitations = extractMarkdownLinks(part).filter((link) =>
+        /^https?:\/\//i.test(link.href)
+      );
+      if (externalCitations.length <= 2) return part;
+      return part.replace(
+        /(\[[^\[\]\r\n]+\]\(https?:\/\/[^()\r\n]+\))\s+(?=\S)/g,
+        '$1\n\n'
+      );
+    })
+    .join('');
+}
+
 function structurallyComplete(article) {
   const title = String((article && article.title) || '').trim();
   const excerpt = String((article && article.excerpt) || '').trim();
@@ -248,6 +265,7 @@ function auditFor(repair) {
     duplicate_internal_link: 'unwrapped_duplicate_internal_link',
     unwrap_link: 'unwrapped_link',
     limit_internal_destinations: 'unwrapped_extra_internal_destinations',
+    split_external_citations: 'split_dense_citation_paragraph',
     v2_cta: 'assembled_cta',
     v5_attribute: 'attributed_first_party',
     v6_replace_token: 'replaced_with_token',
@@ -306,6 +324,14 @@ function repairForProblem(article, problem, options) {
       action: 'shortened_excerpt',
       reason: `excerpt exceeded ${MAX_EXCERPT_LENGTH} characters`,
       field: 'excerpt'
+    };
+  }
+  if (code === 'V10_OTHER' && /Paragraph has \d+ external source citations/i.test(message)) {
+    return {
+      type: 'split_external_citations',
+      code,
+      action: 'split_dense_citation_paragraph',
+      reason: 'more than 2 approved source citations in one paragraph'
     };
   }
   if (code === 'V10_OTHER' && /Internal link repeated:/i.test(message)) {
@@ -585,6 +611,12 @@ function applySafetyFallback(article, problems, options) {
   let needsAssemble = CLAIM_TOKEN_RE.test(String(next.body || ''));
 
   for (const repair of sortRepairs(compiled.repairs)) {
+    if (repair.type === 'split_external_citations') {
+      next = { ...next, body: splitDenseCitationParagraphs(next.body) };
+      applied.push('split_external_citations');
+      audit.push(auditFor(repair));
+      continue;
+    }
     if (repair.type === 'v9_excerpt') {
       next = { ...next, excerpt: safeExcerptFromTitle(next) };
       applied.push('v9_excerpt');
