@@ -62,7 +62,7 @@ function usage() {
     '',
     'If both API keys are set, BLOG_DRAFT_PROVIDER is required.',
     'Phase 2 research (web search + web fetch) runs on the Anthropic path when the topic needs outside facts.',
-    '--deterministic skips the LLM revision pass and uses the repair compiler only. GitHub automation always uses this mode.',
+    '--deterministic skips the LLM revision pass and uses the repair compiler only.',
     'Writes draft: true only. Does not publish, commit, or overwrite.'
   ].join('\n');
 }
