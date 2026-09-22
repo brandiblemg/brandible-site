@@ -1396,6 +1396,46 @@ async function run() {
     passingProblems.map((item) => `${item.id}: ${item.message}`).join(' | ')
   );
 
+  const renderedOverstatement =
+    'Ad Rank is recalculated every single time someone searches and separately for every position.';
+  const renderedOverstatementArticle = {
+    ...tokenArticle,
+    body: tokenArticle.body.replace(approvedClaimSentence(adsClaim), renderedOverstatement)
+  };
+  const renderedOverstatementProblem = {
+    code: 'V3_SOURCE_ENTAILMENT',
+    message:
+      `User-facing sourced wording is not supported by approved claim ${adsClaim.id}: ` +
+      `Stored excerpt does not support the exact claim. Claim: “${renderedOverstatement}”`
+  };
+  const renderedOverstatementFallback = applySafetyFallback(
+    renderedOverstatementArticle,
+    [renderedOverstatementProblem],
+    { allowedClaims: adsAllowed }
+  );
+  assert(
+    'rendered V3 with an approved AC mapping is replaced instead of deleted',
+    renderedOverstatementFallback.refused === false &&
+      renderedOverstatementFallback.applied.includes('v6_replace_token') &&
+      renderedOverstatementFallback.needsAssemble === true &&
+      renderedOverstatementFallback.article.body.includes(`{{${adsClaim.id}}}`) &&
+      !renderedOverstatementFallback.article.body.includes(renderedOverstatement),
+    JSON.stringify({
+      applied: renderedOverstatementFallback.applied,
+      reason: renderedOverstatementFallback.reason,
+      body: renderedOverstatementFallback.article.body
+    })
+  );
+  const renderedOverstatementFinal = validateGeneratedArticle(
+    assembleArticle(renderedOverstatementFallback.article, adsAllowed),
+    ctx(adsPack(), adsAllowed)
+  );
+  assert(
+    'rendered V3 replacement passes final validation',
+    renderedOverstatementFinal.length === 0,
+    renderedOverstatementFinal.map((item) => `${item.id}: ${item.message}`).join(' | ')
+  );
+
   const markdownCitedArticle = assembleArticle(
     {
       ...baseFields(),
