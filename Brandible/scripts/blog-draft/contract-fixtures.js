@@ -1651,18 +1651,23 @@ async function run() {
       rawGoogleProblems.some((item) => /factual platform assertion is not an approved claim token/i.test(item.message)),
     rawGoogleProblems.map((item) => `${item.id}: ${item.message}`).join(' | ')
   );
-  const rawGoogleFallback = applySafetyFallback(rawGoogleArticle, rawGoogleProblems);
+  const rawGoogleFallback = applySafetyFallback(rawGoogleArticle, rawGoogleProblems, { allowedClaims: adsAllowed });
   assert(
-    'V7 fallback deletes the raw Google sentence and empty heading',
+    'V7 fallback replaces a uniquely matching raw Google sentence with an approved claim token',
     !rawGoogleFallback.refused &&
-      rawGoogleFallback.applied.join(',') === 'v7_body' &&
+      rawGoogleFallback.applied.join(',') === 'v6_replace_token' &&
       !/Google Ads runs an auction every time a search happens/.test(rawGoogleFallback.article.body) &&
-      !/## Extra fact/.test(rawGoogleFallback.article.body),
+      /\{\{AC2\}\}/.test(rawGoogleFallback.article.body) &&
+      rawGoogleFallback.deletedSegments === 0,
     rawGoogleFallback.article.body
   );
-  const rawGoogleFinal = validateGeneratedArticle(rawGoogleFallback.article, adsCtx);
+  const rawGoogleFinalArticle = refreshAssemblyState(
+    assembleArticle(rawGoogleFallback.article, adsAllowed),
+    adsAllowed
+  );
+  const rawGoogleFinal = validateGeneratedArticle(rawGoogleFinalArticle, adsCtx);
   assert(
-    'V7 body deletion is removed on final validation',
+    'V7 approved-claim replacement passes final validation',
     rawGoogleFinal.length === 0,
     rawGoogleFinal.map((item) => `${item.id}: ${item.message}`).join(' | ')
   );
@@ -3089,7 +3094,7 @@ async function run() {
   const sevenResult = runDeterministicRepairsToFixedPoint({
     article: sevenArticle,
     ctx: adsCtx,
-    allowedClaims: adsAllowed,
+    allowedClaims: [],
     catalog,
     validate: (article) => {
       sevenCalls += 1;

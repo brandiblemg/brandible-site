@@ -39,6 +39,52 @@ function normalizeSnippet(text) {
     .replace(/\s+/g, ' ')
     .trim();
 }
+const CLAIM_MATCH_STOP_WORDS = new Set([
+  'about', 'after', 'again', 'also', 'because', 'before', 'being', 'between', 'could', 'does',
+  'from', 'google', 'have', 'into', 'just', 'more', 'other', 'should', 'than', 'that', 'their',
+  'there', 'these', 'they', 'this', 'those', 'through', 'using', 'what', 'when', 'where', 'which',
+  'while', 'with', 'would', 'your'
+]);
+
+function claimMatchTerms(text) {
+  const terms = normalizeSnippet(text)
+    .replace(/[^a-z0-9%]+/g, ' ')
+    .split(/\s+/)
+    .map((word) => word.replace(/(?:ies|es|s)$/i, (suffix) => (suffix.toLowerCase() === 'ies' ? 'y' : '')))
+    .filter((word) => word.length >= 3 && !CLAIM_MATCH_STOP_WORDS.has(word));
+  return [...new Set(terms)];
+}
+
+function numbersInText(text) {
+  return normalizeSnippet(text).match(/\b\d+(?:[.,]\d+)?%?\b/g) || [];
+}
+
+function uniquelyMatchingAllowedClaim(sentence, allowedClaims) {
+  const sentenceTerms = claimMatchTerms(sentence);
+  if (sentenceTerms.length < 3) return null;
+  const sentenceNumbers = numbersInText(sentence);
+  const candidates = [];
+
+  for (const claim of allowedClaims || []) {
+    const evidence = `${claim.evidence || ''} ${claim.safe_wording || claim.claim || ''}`;
+    const evidenceTerms = claimMatchTerms(evidence);
+    if (!evidenceTerms.length) continue;
+    const evidenceSet = new Set(evidenceTerms);
+    const hits = sentenceTerms.filter((term) => evidenceSet.has(term));
+    const coverage = hits.length / Math.min(sentenceTerms.length, evidenceTerms.length);
+    const evidenceNumbers = new Set(numbersInText(evidence));
+    if (sentenceNumbers.some((number) => !evidenceNumbers.has(number))) continue;
+    if (hits.length < 2 || coverage < 0.3) continue;
+    candidates.push({ claim, hits: hits.length, coverage });
+  }
+
+  candidates.sort((a, b) => b.hits - a.hits || b.coverage - a.coverage);
+  const best = candidates[0];
+  if (!best) return null;
+  const next = candidates[1];
+  if (next && best.hits === next.hits && best.coverage - next.coverage < 0.12) return null;
+  return best.claim;
+}
 
 function quotedFromMessage(message) {
   const match = String(message || '').match(/“([^”]+)”|"([^"]+)"/);
@@ -492,6 +538,17 @@ function repairForProblem(article, problem, options) {
     const quoted = quotedFromMessage(message);
     const sentence = quoted ? findShortestSegmentContaining(body, quoted) : null;
     if (!sentence) return refuse(message);
+    const matched = uniquelyMatchingAllowedClaim(sentence, allowedClaims);
+    if (matched) {
+      return {
+        type: 'v6_replace_token',
+        code,
+        action: 'replaced_with_token',
+        reason: `replace untagged platform fact with uniquely matching ${matched.id}`,
+        sentence,
+        tokenId: matched.id
+      };
+    }
     return deletionRepair('v7_body', problem, sentence, 'raw platform assertion');
   }
   if (
