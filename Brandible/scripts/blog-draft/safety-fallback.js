@@ -40,10 +40,10 @@ function normalizeSnippet(text) {
     .trim();
 }
 const CLAIM_MATCH_STOP_WORDS = new Set([
-  'about', 'after', 'again', 'also', 'because', 'before', 'being', 'between', 'could', 'does',
+  'about', 'after', 'again', 'also', 'and', 'because', 'before', 'being', 'between', 'but', 'could', 'does',
   'from', 'google', 'have', 'into', 'just', 'more', 'other', 'should', 'than', 'that', 'their',
   'there', 'these', 'they', 'this', 'those', 'through', 'using', 'what', 'when', 'where', 'which',
-  'while', 'with', 'would', 'your'
+  'while', 'with', 'would', 'you', 'your'
 ]);
 
 function claimMatchTerms(text) {
@@ -74,7 +74,7 @@ function uniquelyMatchingAllowedClaim(sentence, allowedClaims) {
     const coverage = hits.length / Math.min(sentenceTerms.length, evidenceTerms.length);
     const evidenceNumbers = new Set(numbersInText(evidence));
     if (sentenceNumbers.some((number) => !evidenceNumbers.has(number))) continue;
-    if (hits.length < 2 || coverage < 0.3) continue;
+    if (hits.length < 2 || coverage < 0.25) continue;
     candidates.push({ claim, hits: hits.length, coverage });
   }
 

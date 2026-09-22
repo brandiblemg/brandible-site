@@ -1671,6 +1671,50 @@ async function run() {
     rawGoogleFinal.length === 0,
     rawGoogleFinal.map((item) => `${item.id}: ${item.message}`).join(' | ')
   );
+  const budgetSentence =
+    'You control the budget ceiling, but Google runs the auction and bills the platform directly.';
+  const budgetClaimText =
+    'Advertisers choose an average daily budget while campaigns participate in a Google Ads auction.';
+  const budgetClaims = [
+    {
+      id: 'AC99',
+      claim: budgetClaimText,
+      safe_wording: budgetClaimText,
+      evidence: budgetClaimText,
+      source_id: 'S99',
+      url: 'https://support.google.com/google-ads/answer/2375423',
+      requires_citation: true
+    }
+  ];
+  const budgetArticle = {
+    ...tokenArticle,
+    body: `${tokenArticle.body.trim()}\n\n${budgetSentence}\n`
+  };
+  const budgetFallback = applySafetyFallback(
+    budgetArticle,
+    [
+      {
+        code: 'V7_CLAIM_LEDGER',
+        message:
+          `Factual platform assertion is not an approved claim token: “${budgetSentence}” ` +
+          'Replace it with an approved {{AC#}} token or delete it. Do not invent a new sourced sentence.'
+      }
+    ],
+    { allowedClaims: budgetClaims }
+  );
+  assert(
+    'V7 unique two-term budget and auction match uses approved wording without deletion',
+    budgetFallback.refused === false &&
+      budgetFallback.applied.join(',') === 'v6_replace_token' &&
+      budgetFallback.article.body.includes('{{AC99}}') &&
+      !budgetFallback.article.body.includes(budgetSentence) &&
+      budgetFallback.deletedSegments === 0,
+    JSON.stringify({
+      applied: budgetFallback.applied,
+      body: budgetFallback.article.body,
+      deletedSegments: budgetFallback.deletedSegments
+    })
+  );
 
   const tooManyArticle = insertBeforeCta(
     tokenArticle,
@@ -2756,7 +2800,7 @@ async function run() {
   };
   const percentLossProblems = validateGeneratedArticle(percentLossArticle, adsCtx);
   const percentLossFallback = applySafetyFallback(percentLossArticle, percentLossProblems, {
-    allowedClaims: adsAllowed
+    allowedClaims: []
   });
   assert(
     '20% deleted content refuses the draft',
@@ -3035,7 +3079,7 @@ async function run() {
   const lossResult = runDeterministicRepairsToFixedPoint({
     article: lossArticle,
     ctx: adsCtx,
-    allowedClaims: adsAllowed,
+    allowedClaims: [],
     catalog,
     validate: (article) => {
       lossCalls += 1;
