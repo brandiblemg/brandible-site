@@ -1716,6 +1716,31 @@ async function run() {
     })
   );
 
+  const factualMetaArticle = {
+    ...tokenArticle,
+    meta_description:
+      "Here's what Google Ads actually cost, how the auction works, and what to set up before you spend a dollar."
+  };
+  const factualMetaProblems = validateGeneratedArticle(factualMetaArticle, adsCtx);
+  const factualMetaFallback = applySafetyFallback(factualMetaArticle, factualMetaProblems, {
+    allowedClaims: adsAllowed
+  });
+  const factualMetaFinal = validateGeneratedArticle(factualMetaFallback.article, adsCtx);
+  assert(
+    'V7 factual meta description is rewritten as non-factual frontmatter',
+    factualMetaProblems.some(
+      (item) => item.code === 'V7_CLAIM_LEDGER' && /meta_description/i.test(item.message)
+    ) &&
+      factualMetaFallback.refused === false &&
+      factualMetaFallback.applied.includes('v7_meta_description') &&
+      !/Google Ads|auction/i.test(factualMetaFallback.article.meta_description) &&
+      factualMetaFinal.length === 0,
+    JSON.stringify({
+      applied: factualMetaFallback.applied,
+      meta: factualMetaFallback.article.meta_description,
+      problems: factualMetaFinal
+    })
+  );
   const tooManyArticle = insertBeforeCta(
     tokenArticle,
     [
