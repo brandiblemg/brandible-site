@@ -1687,6 +1687,53 @@ async function run() {
     metaEveryoneProblems.map((item) => `${item.id}: ${item.message}`).join(' | ')
   );
 
+  const failedRunExcerpt =
+    "Most business owners don't know what Google Ads really cost until the clicks start coming in. " +
+    'Learn how bidding, targeting, landing pages, and follow-up affect your budget, where money gets wasted, and what to review before you spend another dollar on a campaign that is not ready to convert.';
+  const failedRunArticle = {
+    ...tokenArticle,
+    excerpt: failedRunExcerpt.slice(0, 291).padEnd(291, ' Review the basics.')
+  };
+  const failedRunProblems = validateGeneratedArticle(failedRunArticle, adsCtx);
+  assert(
+    'failed-run excerpt reproduces V9 plus the 291-character V10 failure',
+    failedRunArticle.excerpt.length === 291 &&
+      failedRunProblems.some(
+        (item) => item.code === 'V9_QUANTIFIER' && /unsupported quantifier in excerpt/i.test(item.message)
+      ) &&
+      failedRunProblems.some(
+        (item) => item.code === 'V10_OTHER' && /excerpt should be about 40.+240 characters \(now 291\)/i.test(item.message)
+      ),
+    failedRunProblems.map((item) => `${item.id}: ${item.message}`).join(' | ')
+  );
+  const failedRunFixed = runDeterministicRepairsToFixedPoint({
+    article: failedRunArticle,
+    ctx: adsCtx,
+    allowedClaims: adsAllowed,
+    catalog
+  });
+  assert(
+    'failed-run excerpt is rewritten and shortened deterministically',
+    failedRunFixed.refused === false &&
+      failedRunFixed.article.excerpt.length >= 40 &&
+      failedRunFixed.article.excerpt.length <= 240 &&
+      !/\b(?:most|the majority of|everyone|everybody)\b/i.test(failedRunFixed.article.excerpt) &&
+      failedRunFixed.article.body === failedRunArticle.body &&
+      failedRunFixed.repairs.some((item) => item.action === 'rewritten_excerpt') &&
+      failedRunFixed.repairs.some((item) => item.action === 'shortened_excerpt'),
+    JSON.stringify({
+      refused: failedRunFixed.refused,
+      reason: failedRunFixed.reason,
+      excerpt: failedRunFixed.article.excerpt,
+      repairs: failedRunFixed.repairs
+    })
+  );
+  assert(
+    'failed-run excerpt passes final validation',
+    failedRunFixed.problems.length === 0,
+    failedRunFixed.problems.map((item) => `${item.id}: ${item.message}`).join(' | ')
+  );
+
   const entailmentFallback = applySafetyFallback(stronger, strongerProblems, { allowedClaims: gbpAllowed });
   const entailmentAfter = validateGeneratedArticle(
     entailmentFallback.refused ? entailmentFallback.article : entailmentFallback.article,

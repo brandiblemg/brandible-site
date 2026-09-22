@@ -9,6 +9,7 @@ const { stripMarkdownLinks } = require('./markdown-links');
 const MAX_DELETED_SEGMENTS = 6;
 const MAX_DELETED_CHAR_RATIO = 0.2;
 const MAX_DETERMINISTIC_ROUNDS = 8;
+const MAX_EXCERPT_LENGTH = 240;
 const EM_DASH = '\u2014';
 const CLAIM_TOKEN_RE = /\{\{\s*AC\d+\s*\}\}/;
 const APPLY_ORDER = [
@@ -19,6 +20,8 @@ const APPLY_ORDER = [
   'v7_body',
   'v8_body',
   'v9_body',
+  'v9_excerpt',
+  'clip_excerpt',
   'deleted_segment',
   'drop_sourced_claim',
   'v2_cta',
@@ -162,6 +165,43 @@ function replaceEmDashes(value) {
   return String(value || '').split(EM_DASH).join('-');
 }
 
+function clipFrontmatterText(value, maxLength) {
+  const clean = String(value || '').replace(/\s+/g, ' ').trim();
+  if (clean.length <= maxLength) return clean;
+
+  const slice = clean.slice(0, maxLength);
+  const sentenceEnd = Math.max(
+    slice.lastIndexOf('. '),
+    slice.lastIndexOf('? '),
+    slice.lastIndexOf('! ')
+  );
+  if (sentenceEnd >= 40) return slice.slice(0, sentenceEnd + 1).trim();
+
+  const hardLimit = clean.slice(0, maxLength - 1);
+  const wordEnd = hardLimit.lastIndexOf(' ');
+  const clipped = (wordEnd >= 40 ? hardLimit.slice(0, wordEnd) : hardLimit)
+    .replace(/[,:;\u2013\u2014-]+$/, '')
+    .trim();
+  return /[.!?]$/.test(clipped) ? clipped : `${clipped}.`;
+}
+
+function sentenceCaseTitle(value) {
+  const title = String(value || '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/[.!?]+$/, '');
+  if (/^[A-Z][a-z]/.test(title)) return `${title[0].toLowerCase()}${title.slice(1)}`;
+  return title;
+}
+
+function safeExcerptFromTitle(article) {
+  const title = sentenceCaseTitle(article && article.title);
+  const text = title
+    ? `A practical look at ${title}. See what to review before making a decision.`
+    : 'A practical look at the topic, what matters, and what to review before making a decision.';
+  return clipFrontmatterText(text, MAX_EXCERPT_LENGTH);
+}
+
 function escapeRegExp(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -217,6 +257,8 @@ function auditFor(repair) {
     v7_body: 'deleted_segment',
     v8_body: 'deleted_segment',
     v9_body: 'deleted_segment',
+    v9_excerpt: 'rewritten_excerpt',
+    clip_excerpt: 'shortened_excerpt',
     deleted_segment: 'deleted_segment'
   };
   return {
@@ -252,6 +294,19 @@ function repairForProblem(article, problem, options) {
 
   if (code === 'V10_OTHER' && /contains an em dash/i.test(message)) {
     return { type: 'em_dash', code, action: 'normalized_em_dash', reason: 'em dash' };
+  }
+  if (code === 'V10_OTHER' && /excerpt should be about 40.+240 characters/i.test(message)) {
+    const excerpt = String((article && article.excerpt) || '').trim();
+    if (excerpt.length <= MAX_EXCERPT_LENGTH) {
+      return refuse(`Short excerpts cannot be expanded deterministically: ${message}`);
+    }
+    return {
+      type: 'clip_excerpt',
+      code,
+      action: 'shortened_excerpt',
+      reason: `excerpt exceeded ${MAX_EXCERPT_LENGTH} characters`,
+      field: 'excerpt'
+    };
   }
   if (code === 'V10_OTHER' && /Internal link repeated:/i.test(message)) {
     const href = extractInternalHref(message);
@@ -299,6 +354,15 @@ function repairForProblem(article, problem, options) {
   }
 
   if (code === 'V9_QUANTIFIER') {
+    if (/unsupported quantifier in excerpt/i.test(message)) {
+      return {
+        type: 'v9_excerpt',
+        code,
+        action: 'rewritten_excerpt',
+        reason: 'unsupported quantifier in excerpt',
+        field: 'excerpt'
+      };
+    }
     if (!/unsupported quantifier in body/i.test(message)) {
       return refuse(`V9 in title/meta/excerpt cannot be repaired: ${message}`);
     }
@@ -446,7 +510,7 @@ function compileRepairs(article, problems, options) {
     if (!repair || repair.type === 'refuse') {
       return { repairs: [], refused: true, reason: (repair && repair.reason) || String((problem && problem.message) || 'unrepairable') };
     }
-    const key = `${repair.type}:${repair.href || repair.tokenId || repair.sentence || repair.quote || repair.reason}`;
+    const key = `${repair.type}:${repair.field || repair.href || repair.tokenId || repair.sentence || repair.quote || repair.reason}`;
     if (!remember(key)) continue;
     repairs.push(repair);
   }
@@ -521,6 +585,22 @@ function applySafetyFallback(article, problems, options) {
   let needsAssemble = CLAIM_TOKEN_RE.test(String(next.body || ''));
 
   for (const repair of sortRepairs(compiled.repairs)) {
+    if (repair.type === 'v9_excerpt') {
+      next = { ...next, excerpt: safeExcerptFromTitle(next) };
+      applied.push('v9_excerpt');
+      audit.push(auditFor(repair));
+      continue;
+    }
+    if (repair.type === 'clip_excerpt') {
+      let excerpt = clipFrontmatterText(next.excerpt, MAX_EXCERPT_LENGTH);
+      if (excerpt === String(next.meta_description || '').trim()) {
+        excerpt = safeExcerptFromTitle(next);
+      }
+      next = { ...next, excerpt };
+      applied.push('clip_excerpt');
+      audit.push(auditFor(repair));
+      continue;
+    }
     if (repair.type === 'em_dash') {
       next = applyEmDashRepair(next);
       applied.push('em_dash');
