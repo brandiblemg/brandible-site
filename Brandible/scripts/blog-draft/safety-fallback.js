@@ -431,7 +431,7 @@ function repairForProblem(article, problem, options) {
     const quoted = quotedFromMessage(message);
     const tokenId = extractAcId(message);
     const sentence = quoted ? findShortestSegmentContaining(body, quoted) : null;
-    if (tokenId && findAllowedClaim(allowedClaims, tokenId) && sentence && /\{\{\s*AC\d+\s*\}\}/.test(message)) {
+    if (tokenId && findAllowedClaim(allowedClaims, tokenId) && sentence) {
       return {
         type: 'v6_replace_token',
         code,
