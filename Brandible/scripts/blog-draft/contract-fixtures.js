@@ -3321,6 +3321,27 @@ async function run() {
     densityProblems.some((item) => /external source citations/i.test(item.message) && /keep one by default/i.test(item.message)),
     densityProblems.map((item) => `${item.id}: ${item.message}`).join(' | ')
   );
+  const densityFallback = applySafetyFallback(densityAssembled, densityProblems, {
+    allowedClaims: combinedClaims
+  });
+  const densityRepaired = refreshAssemblyState(densityFallback.article, combinedClaims);
+  const densityFinal = validateGeneratedArticle(densityRepaired, densityCtx);
+  assert(
+    'citation density fallback splits paragraphs without removing claims or citations',
+    densityFallback.refused === false &&
+      densityFallback.applied.includes('split_external_citations') &&
+      (densityFallback.article.body.match(/\[Source\]\(https?:\/\/[^)]+\)/g) || []).length === 3 &&
+      [combinedMigrate, combinedAds, combinedExpect].every((item) =>
+        densityFallback.article.body.includes(item.url)
+      ) &&
+      densityFinal.length === 0,
+    JSON.stringify({
+      applied: densityFallback.applied,
+      reason: densityFallback.reason,
+      body: densityFallback.article.body,
+      problems: densityFinal
+    })
+  );
 
   const twoDistinct = assembleArticle(
     {
