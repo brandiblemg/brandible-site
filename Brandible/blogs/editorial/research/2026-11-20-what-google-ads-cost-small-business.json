@@ -1,0 +1,580 @@
+{
+  "post": "2026-11-20-what-google-ads-cost-small-business.md",
+  "topic_id": "09",
+  "generated_at": "2026-11-20T02:24:08.031Z",
+  "facts_last_verified": "2026-08-31",
+  "research": {
+    "needed": true,
+    "skipped_reason": null,
+    "queries": [
+      "Google Ads ad rank auction how ads are selected cost per click",
+      "Google Search Central how organic search ranking works SEO beginners",
+      "Google Ads campaign types conversion tracking small business 2024"
+    ],
+    "retrieved_at": "2026-11-20T02:21:56.519Z"
+  },
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://support.google.com/google-ads/answer/1722122?hl=en",
+      "title": "About Ad Rank",
+      "publisher": "Google Ads Help",
+      "excerpt": "Ad Rank is a set of values that are used to determine whether your ads are eligible to show and if eligible, where on the page your ads are shown (if at all) relative to other advertisers' ads.",
+      "evidence": [
+        {
+          "about": "auction",
+          "quote": "In each auction, your Ad Rank is calculated first to determine whether your ad is eligible to show, and a second time to determine where your ad is ranked relative to other eligible advertisers' ads."
+        },
+        {
+          "about": "ad_rank",
+          "quote": "These Ad Rank values are calculated based on several factors, including your competition, the context of the person's search, and your ad quality at that moment."
+        },
+        {
+          "about": "ad_rank",
+          "quote": "Your bid - When you set your bid, you're telling Google Ads the maximum amount you're willing to pay for a click on your ad. How much you actually end up paying is often less, and you can change your bid at any time."
+        },
+        {
+          "about": "ad_rank",
+          "quote": "Higher quality ads can often lead to lower CPCs. That means you pay less per click when your ads are higher quality."
+        },
+        {
+          "about": "ad_rank",
+          "quote": "Ad Rank is calculated every time a user does a search and is recalculated for different positions on the search results page."
+        },
+        {
+          "about": "ad_rank",
+          "quote": "Overall, higher quality ads typically lead to lower costs and more advertising success. The Google Ads system works best for everybody when the ads we show are relevant and closely match what customers are searching for."
+        }
+      ],
+      "why_selected": "Primary official source for the ad auction and Ad Rank mechanics — the core mechanism explaining why ads cost what they cost, why higher quality can lower CPC, and why ads stop showing when spend or quality falls below threshold.",
+      "product": "google_ads",
+      "features": [
+        "ad_rank",
+        "auction"
+      ],
+      "feature_status": "current"
+    },
+    {
+      "id": "S2",
+      "url": "https://developers.google.com/search/docs/fundamentals/how-search-works",
+      "title": "In-Depth Guide to How Google Search Works",
+      "publisher": "Google Search Central (developers.google.com)",
+      "excerpt": "Google Search is a fully-automated search engine that uses software known as web crawlers that explore the web regularly to find pages to add to our index. In fact, the vast majority of pages listed in our results aren't manually submitted for inclusion, but are found and added automatically when our web crawlers explore the web.",
+      "evidence": [
+        {
+          "about": "organic_search",
+          "quote": "Google doesn't accept payment to crawl a site more frequently, or rank it higher. If anyone tells you otherwise, they're wrong."
+        },
+        {
+          "about": "ranking",
+          "quote": "Crawling: Google downloads text, images, and videos from pages it found on the internet with automated programs called crawlers. Indexing: Google analyzes the text, images, and video files on the page, and stores the information in the Google index, which is a large database. Serving search results: When a user searches on Google, Google returns information that's relevant to the user's query."
+        },
+        {
+          "about": "organic_search",
+          "quote": "Google doesn't guarantee that it will crawl, index, or serve your page, even if your page follows the Google Search Essentials."
+        }
+      ],
+      "why_selected": "Authoritative Google Search Central doc establishing that organic ranking is fully independent of paid ad spend — directly relevant to the article's claim that stopping ads does not hurt organic rankings, and that organic listing is free.",
+      "product": "google_search",
+      "features": [
+        "organic_search",
+        "ranking"
+      ],
+      "feature_status": "current"
+    },
+    {
+      "id": "S3",
+      "url": "https://support.google.com/google-ads/answer/1722054?hl=en",
+      "title": "Different Ways to Track Conversions",
+      "publisher": "Google Ads Help",
+      "excerpt": "When you run ads with Google Ads, you may want to know whether clicks on your ad led customers to take certain actions such as making a purchase on your website, calling your business, or downloading your app.",
+      "evidence": [
+        {
+          "about": "conversion_tracking",
+          "quote": "Website purchases, newsletter signups, button clicks, or other website actions. | Set up your web conversions\nCustomer installs your app or purchases from your app | Set up your app conversions\nPhone calls | Set up your phone call conversions\nOffline conversions, such as store visits or phone calls after your ad ran | Set up your offline conversions"
+        },
+        {
+          "about": "conversion_tracking",
+          "quote": "Track multiple types of conversions from the list above by creating a separate conversion action for each type. For example, set up one conversion action to track purchases on your website and another to track calls from your ads."
+        },
+        {
+          "about": "conversion_tracking",
+          "quote": "You can also set up multiple conversion actions for each conversion source. For example, if you want to track both purchases and newsletter sign-ups on your website, create one conversion action for purchases and another for sign-ups."
+        }
+      ],
+      "why_selected": "Official Google Ads Help doc enumerating current, non-deprecated conversion tracking types. Directly supports the article's 'tracking, not vanity' stance and CTA to set up conversion tracking before spending more.",
+      "product": "google_ads",
+      "features": [
+        "conversion_tracking"
+      ],
+      "feature_status": "current"
+    },
+    {
+      "id": "S4",
+      "url": "https://support.google.com/google-ads/answer/2567043?hl=en",
+      "title": "Choose the Right Campaign Type",
+      "publisher": "Google Ads Help",
+      "excerpt": "You'll choose a campaign type based on your marketing goals, brand strategy, and how much time you can invest. This article helps you select the right campaign type for your advertising needs.",
+      "evidence": [
+        {
+          "about": "ad_rank",
+          "quote": "Search campaigns are text ads on search results that let you reach people while they're searching on Google for the products and services you offer. It's great for driving sales, leads, or traffic to your website, as you can show your ads to people actively searching for your products and services."
+        },
+        {
+          "about": "conversion_tracking",
+          "quote": "Performance Max is a goal-based campaign type that allows performance advertisers to access all Google Ads inventory from a single campaign. Performance Max helps you drive performance based on your specified conversion goals, delivering more conversions and value by optimizing performance in real time and across channels using Smart Bidding."
+        },
+        {
+          "about": "conversion_tracking",
+          "quote": "Performance Max campaigns are designed to be easy to launch, and when your campaign is live, it'll be optimized by Google AI to drive the best performance possible."
+        },
+        {
+          "about": "ad_rank",
+          "quote": "Display campaigns let you reach a relevant audience with visually engaging ads as they browse millions of websites, apps, and Google-owned properties, such as YouTube, to achieve your marketing objectives."
+        }
+      ],
+      "why_selected": "Current official campaign-type taxonomy page. Confirms which campaign types are live (Search, Display, Video, App, Shopping, Performance Max) and ties campaign goals to conversion tracking — supporting the article's framing of cost relative to campaign objective.",
+      "product": "google_ads",
+      "features": [
+        "ad_rank",
+        "conversion_tracking"
+      ],
+      "feature_status": "current"
+    }
+  ],
+  "allowed_claims": [
+    {
+      "id": "AC1",
+      "token": "{{AC1}}",
+      "claim": "Ad Rank is a set of values that are used to determine whether your ads are eligible to show and if eligible, where on the page your ads are shown (if at all) relative to other advertisers' ads.",
+      "safe_wording": "Ad Rank is a set of values that are used to determine whether your ads are eligible to show and if eligible, where on the page your ads are shown (if at all) relative to other advertisers' ads.",
+      "source_id": "S1",
+      "url": "https://support.google.com/google-ads/answer/1722122?hl=en",
+      "evidence": "Ad Rank is a set of values that are used to determine whether your ads are eligible to show and if eligible, where on the page your ads are shown (if at all) relative to other advertisers' ads.",
+      "about": "excerpt",
+      "product": "google_ads",
+      "requires_citation": true
+    },
+    {
+      "id": "AC2",
+      "token": "{{AC2}}",
+      "claim": "In each auction, your Ad Rank is calculated first to determine whether your ad is eligible to show, and a second time to determine where your ad is ranked relative to other eligible advertisers' ads.",
+      "safe_wording": "In each auction, your Ad Rank is calculated first to determine whether your ad is eligible to show, and a second time to determine where your ad is ranked relative to other eligible advertisers' ads.",
+      "source_id": "S1",
+      "url": "https://support.google.com/google-ads/answer/1722122?hl=en",
+      "evidence": "In each auction, your Ad Rank is calculated first to determine whether your ad is eligible to show, and a second time to determine where your ad is ranked relative to other eligible advertisers' ads.",
+      "about": "auction",
+      "product": "google_ads",
+      "requires_citation": true
+    },
+    {
+      "id": "AC3",
+      "token": "{{AC3}}",
+      "claim": "These Ad Rank values are calculated based on several factors, including your competition, the context of the person's search, and your ad quality at that moment.",
+      "safe_wording": "These Ad Rank values are calculated based on several factors, including your competition, the context of the person's search, and your ad quality at that moment.",
+      "source_id": "S1",
+      "url": "https://support.google.com/google-ads/answer/1722122?hl=en",
+      "evidence": "These Ad Rank values are calculated based on several factors, including your competition, the context of the person's search, and your ad quality at that moment.",
+      "about": "ad_rank",
+      "product": "google_ads",
+      "requires_citation": true
+    },
+    {
+      "id": "AC4",
+      "token": "{{AC4}}",
+      "claim": "Your bid - When you set your bid, you're telling Google Ads the maximum amount you're willing to pay for a click on your ad. How much you actually end up paying is often less, and you can change your bid at any time.",
+      "safe_wording": "Your bid - When you set your bid, you're telling Google Ads the maximum amount you're willing to pay for a click on your ad. How much you actually end up paying is often less, and you can change your bid at any time.",
+      "source_id": "S1",
+      "url": "https://support.google.com/google-ads/answer/1722122?hl=en",
+      "evidence": "Your bid - When you set your bid, you're telling Google Ads the maximum amount you're willing to pay for a click on your ad. How much you actually end up paying is often less, and you can change your bid at any time.",
+      "about": "ad_rank",
+      "product": "google_ads",
+      "requires_citation": true
+    },
+    {
+      "id": "AC5",
+      "token": "{{AC5}}",
+      "claim": "Higher quality ads can often lead to lower CPCs. That means you pay less per click when your ads are higher quality.",
+      "safe_wording": "Higher quality ads can often lead to lower CPCs. That means you pay less per click when your ads are higher quality.",
+      "source_id": "S1",
+      "url": "https://support.google.com/google-ads/answer/1722122?hl=en",
+      "evidence": "Higher quality ads can often lead to lower CPCs. That means you pay less per click when your ads are higher quality.",
+      "about": "ad_rank",
+      "product": "google_ads",
+      "requires_citation": true
+    },
+    {
+      "id": "AC6",
+      "token": "{{AC6}}",
+      "claim": "Ad Rank is calculated every time a user does a search and is recalculated for different positions on the search results page.",
+      "safe_wording": "Ad Rank is calculated every time a user does a search and is recalculated for different positions on the search results page.",
+      "source_id": "S1",
+      "url": "https://support.google.com/google-ads/answer/1722122?hl=en",
+      "evidence": "Ad Rank is calculated every time a user does a search and is recalculated for different positions on the search results page.",
+      "about": "ad_rank",
+      "product": "google_ads",
+      "requires_citation": true
+    },
+    {
+      "id": "AC7",
+      "token": "{{AC7}}",
+      "claim": "Overall, higher quality ads typically lead to lower costs and more advertising success. The Google Ads system works best for everybody when the ads we show are relevant and closely match what customers are searching for.",
+      "safe_wording": "Overall, higher quality ads typically lead to lower costs and more advertising success. The Google Ads system works best for everybody when the ads we show are relevant and closely match what customers are searching for.",
+      "source_id": "S1",
+      "url": "https://support.google.com/google-ads/answer/1722122?hl=en",
+      "evidence": "Overall, higher quality ads typically lead to lower costs and more advertising success. The Google Ads system works best for everybody when the ads we show are relevant and closely match what customers are searching for.",
+      "about": "ad_rank",
+      "product": "google_ads",
+      "requires_citation": true
+    },
+    {
+      "id": "AC8",
+      "token": "{{AC8}}",
+      "claim": "Google Search is a fully-automated search engine that uses software known as web crawlers that explore the web regularly to find pages to add to our index.",
+      "safe_wording": "Google Search is a fully-automated search engine that uses software known as web crawlers that explore the web regularly to find pages to add to our index.",
+      "source_id": "S2",
+      "url": "https://developers.google.com/search/docs/fundamentals/how-search-works",
+      "evidence": "Google Search is a fully-automated search engine that uses software known as web crawlers that explore the web regularly to find pages to add to our index.",
+      "about": "excerpt",
+      "product": "google_search",
+      "requires_citation": true
+    },
+    {
+      "id": "AC9",
+      "token": "{{AC9}}",
+      "claim": "In fact, the vast majority of pages listed in our results aren't manually submitted for inclusion, but are found and added automatically when our web crawlers explore the web.",
+      "safe_wording": "In fact, the vast majority of pages listed in our results aren't manually submitted for inclusion, but are found and added automatically when our web crawlers explore the web.",
+      "source_id": "S2",
+      "url": "https://developers.google.com/search/docs/fundamentals/how-search-works",
+      "evidence": "In fact, the vast majority of pages listed in our results aren't manually submitted for inclusion, but are found and added automatically when our web crawlers explore the web.",
+      "about": "excerpt",
+      "product": "google_search",
+      "requires_citation": true
+    },
+    {
+      "id": "AC10",
+      "token": "{{AC10}}",
+      "claim": "Google doesn't accept payment to crawl a site more frequently, or rank it higher. If anyone tells you otherwise, they're wrong.",
+      "safe_wording": "Google doesn't accept payment to crawl a site more frequently, or rank it higher. If anyone tells you otherwise, they're wrong.",
+      "source_id": "S2",
+      "url": "https://developers.google.com/search/docs/fundamentals/how-search-works",
+      "evidence": "Google doesn't accept payment to crawl a site more frequently, or rank it higher. If anyone tells you otherwise, they're wrong.",
+      "about": "organic_search",
+      "product": "google_search",
+      "requires_citation": true
+    },
+    {
+      "id": "AC11",
+      "token": "{{AC11}}",
+      "claim": "Crawling: Google downloads text, images, and videos from pages it found on the internet with automated programs called crawlers. Indexing: Google analyzes the text, images, and video files on the page, and stores the information in the Google index, which is a large database. Serving search results: When a user searches on Google, Google returns information that's relevant to the user's query.",
+      "safe_wording": "Crawling: Google downloads text, images, and videos from pages it found on the internet with automated programs called crawlers. Indexing: Google analyzes the text, images, and video files on the page, and stores the information in the Google index, which is a large database. Serving search results: When a user searches on Google, Google returns information that's relevant to the user's query.",
+      "source_id": "S2",
+      "url": "https://developers.google.com/search/docs/fundamentals/how-search-works",
+      "evidence": "Crawling: Google downloads text, images, and videos from pages it found on the internet with automated programs called crawlers. Indexing: Google analyzes the text, images, and video files on the page, and stores the information in the Google index, which is a large database. Serving search results: When a user searches on Google, Google returns information that's relevant to the user's query.",
+      "about": "ranking",
+      "product": "google_search",
+      "requires_citation": true
+    },
+    {
+      "id": "AC12",
+      "token": "{{AC12}}",
+      "claim": "Google doesn't guarantee that it will crawl, index, or serve your page, even if your page follows the Google Search Essentials.",
+      "safe_wording": "Google doesn't guarantee that it will crawl, index, or serve your page, even if your page follows the Google Search Essentials.",
+      "source_id": "S2",
+      "url": "https://developers.google.com/search/docs/fundamentals/how-search-works",
+      "evidence": "Google doesn't guarantee that it will crawl, index, or serve your page, even if your page follows the Google Search Essentials.",
+      "about": "organic_search",
+      "product": "google_search",
+      "requires_citation": true
+    },
+    {
+      "id": "AC13",
+      "token": "{{AC13}}",
+      "claim": "When you run ads with Google Ads, you may want to know whether clicks on your ad led customers to take certain actions such as making a purchase on your website, calling your business, or downloading your app.",
+      "safe_wording": "When you run ads with Google Ads, you may want to know whether clicks on your ad led customers to take certain actions such as making a purchase on your website, calling your business, or downloading your app.",
+      "source_id": "S3",
+      "url": "https://support.google.com/google-ads/answer/1722054?hl=en",
+      "evidence": "When you run ads with Google Ads, you may want to know whether clicks on your ad led customers to take certain actions such as making a purchase on your website, calling your business, or downloading your app.",
+      "about": "excerpt",
+      "product": "google_ads",
+      "requires_citation": true
+    },
+    {
+      "id": "AC14",
+      "token": "{{AC14}}",
+      "claim": "Website purchases, newsletter signups, button clicks, or other website actions. | Set up your web conversions Customer installs your app or purchases from your app | Set up your app conversions Phone calls | Set up your phone call conversions Offline conversions, such as store visits or phone calls after your ad ran | Set up your offline conversions.",
+      "safe_wording": "Website purchases, newsletter signups, button clicks, or other website actions. | Set up your web conversions Customer installs your app or purchases from your app | Set up your app conversions Phone calls | Set up your phone call conversions Offline conversions, such as store visits or phone calls after your ad ran | Set up your offline conversions.",
+      "source_id": "S3",
+      "url": "https://support.google.com/google-ads/answer/1722054?hl=en",
+      "evidence": "Website purchases, newsletter signups, button clicks, or other website actions. | Set up your web conversions\nCustomer installs your app or purchases from your app | Set up your app conversions\nPhone calls | Set up your phone call conversions\nOffline conversions, such as store visits or phone calls after your ad ran | Set up your offline conversions",
+      "about": "conversion_tracking",
+      "product": "google_ads",
+      "requires_citation": true
+    },
+    {
+      "id": "AC15",
+      "token": "{{AC15}}",
+      "claim": "Track multiple types of conversions from the list above by creating a separate conversion action for each type. For example, set up one conversion action to track purchases on your website and another to track calls from your ads.",
+      "safe_wording": "Track multiple types of conversions from the list above by creating a separate conversion action for each type. For example, set up one conversion action to track purchases on your website and another to track calls from your ads.",
+      "source_id": "S3",
+      "url": "https://support.google.com/google-ads/answer/1722054?hl=en",
+      "evidence": "Track multiple types of conversions from the list above by creating a separate conversion action for each type. For example, set up one conversion action to track purchases on your website and another to track calls from your ads.",
+      "about": "conversion_tracking",
+      "product": "google_ads",
+      "requires_citation": true
+    },
+    {
+      "id": "AC16",
+      "token": "{{AC16}}",
+      "claim": "You can also set up multiple conversion actions for each conversion source. For example, if you want to track both purchases and newsletter sign-ups on your website, create one conversion action for purchases and another for sign-ups.",
+      "safe_wording": "You can also set up multiple conversion actions for each conversion source. For example, if you want to track both purchases and newsletter sign-ups on your website, create one conversion action for purchases and another for sign-ups.",
+      "source_id": "S3",
+      "url": "https://support.google.com/google-ads/answer/1722054?hl=en",
+      "evidence": "You can also set up multiple conversion actions for each conversion source. For example, if you want to track both purchases and newsletter sign-ups on your website, create one conversion action for purchases and another for sign-ups.",
+      "about": "conversion_tracking",
+      "product": "google_ads",
+      "requires_citation": true
+    },
+    {
+      "id": "AC17",
+      "token": "{{AC17}}",
+      "claim": "You'll choose a campaign type based on your marketing goals, brand strategy, and how much time you can invest.",
+      "safe_wording": "You'll choose a campaign type based on your marketing goals, brand strategy, and how much time you can invest.",
+      "source_id": "S4",
+      "url": "https://support.google.com/google-ads/answer/2567043?hl=en",
+      "evidence": "You'll choose a campaign type based on your marketing goals, brand strategy, and how much time you can invest.",
+      "about": "excerpt",
+      "product": "google_ads",
+      "requires_citation": true
+    },
+    {
+      "id": "AC18",
+      "token": "{{AC18}}",
+      "claim": "This article helps you select the right campaign type for your advertising needs.",
+      "safe_wording": "This article helps you select the right campaign type for your advertising needs.",
+      "source_id": "S4",
+      "url": "https://support.google.com/google-ads/answer/2567043?hl=en",
+      "evidence": "This article helps you select the right campaign type for your advertising needs.",
+      "about": "excerpt",
+      "product": "google_ads",
+      "requires_citation": true
+    },
+    {
+      "id": "AC19",
+      "token": "{{AC19}}",
+      "claim": "Search campaigns are text ads on search results that let you reach people while they're searching on Google for the products and services you offer. It's great for driving sales, leads, or traffic to your website, as you can show your ads to people actively searching for your products and services.",
+      "safe_wording": "Search campaigns are text ads on search results that let you reach people while they're searching on Google for the products and services you offer. It's great for driving sales, leads, or traffic to your website, as you can show your ads to people actively searching for your products and services.",
+      "source_id": "S4",
+      "url": "https://support.google.com/google-ads/answer/2567043?hl=en",
+      "evidence": "Search campaigns are text ads on search results that let you reach people while they're searching on Google for the products and services you offer. It's great for driving sales, leads, or traffic to your website, as you can show your ads to people actively searching for your products and services.",
+      "about": "ad_rank",
+      "product": "google_ads",
+      "requires_citation": true
+    },
+    {
+      "id": "AC20",
+      "token": "{{AC20}}",
+      "claim": "Performance Max is a goal-based campaign type that allows performance advertisers to access all Google Ads inventory from a single campaign. Performance Max helps you drive performance based on your specified conversion goals, delivering more conversions and value by optimizing performance in real time and across channels using Smart Bidding.",
+      "safe_wording": "Performance Max is a goal-based campaign type that allows performance advertisers to access all Google Ads inventory from a single campaign. Performance Max helps you drive performance based on your specified conversion goals, delivering more conversions and value by optimizing performance in real time and across channels using Smart Bidding.",
+      "source_id": "S4",
+      "url": "https://support.google.com/google-ads/answer/2567043?hl=en",
+      "evidence": "Performance Max is a goal-based campaign type that allows performance advertisers to access all Google Ads inventory from a single campaign. Performance Max helps you drive performance based on your specified conversion goals, delivering more conversions and value by optimizing performance in real time and across channels using Smart Bidding.",
+      "about": "conversion_tracking",
+      "product": "google_ads",
+      "requires_citation": true
+    },
+    {
+      "id": "AC21",
+      "token": "{{AC21}}",
+      "claim": "Performance Max campaigns are designed to be easy to launch, and when your campaign is live, it'll be optimized by Google AI to drive the best performance possible.",
+      "safe_wording": "Performance Max campaigns are designed to be easy to launch, and when your campaign is live, it'll be optimized by Google AI to drive the best performance possible.",
+      "source_id": "S4",
+      "url": "https://support.google.com/google-ads/answer/2567043?hl=en",
+      "evidence": "Performance Max campaigns are designed to be easy to launch, and when your campaign is live, it'll be optimized by Google AI to drive the best performance possible.",
+      "about": "conversion_tracking",
+      "product": "google_ads",
+      "requires_citation": true
+    },
+    {
+      "id": "AC22",
+      "token": "{{AC22}}",
+      "claim": "Display campaigns let you reach a relevant audience with visually engaging ads as they browse millions of websites, apps, and Google-owned properties, such as YouTube, to achieve your marketing objectives.",
+      "safe_wording": "Display campaigns let you reach a relevant audience with visually engaging ads as they browse millions of websites, apps, and Google-owned properties, such as YouTube, to achieve your marketing objectives.",
+      "source_id": "S4",
+      "url": "https://support.google.com/google-ads/answer/2567043?hl=en",
+      "evidence": "Display campaigns let you reach a relevant audience with visually engaging ads as they browse millions of websites, apps, and Google-owned properties, such as YouTube, to achieve your marketing objectives.",
+      "about": "ad_rank",
+      "product": "google_ads",
+      "requires_citation": true
+    }
+  ],
+  "claim_tokens_used": [
+    "AC4",
+    "AC1",
+    "AC3",
+    "AC5",
+    "AC19",
+    "AC22",
+    "AC20",
+    "AC17",
+    "AC13",
+    "AC15",
+    "AC10"
+  ],
+  "approved_first_party_numbers": {
+    "money": [
+      0.19,
+      4.02,
+      400,
+      500,
+      600,
+      750,
+      1500,
+      2000,
+      3500,
+      5000,
+      10000
+    ],
+    "percents": [
+      15,
+      95
+    ],
+    "counts": [
+      2,
+      12,
+      13,
+      37,
+      74,
+      250,
+      968,
+      1963,
+      72309
+    ],
+    "timelines": [
+      "2–4 weeks",
+      "30 days"
+    ]
+  },
+  "claims": [
+    {
+      "claim": "You're paying per click, and your maximum bid is what you're willing to pay for each one.",
+      "kind": "sourced_fact",
+      "source_id": "S1",
+      "allowed_claim_id": "AC4"
+    },
+    {
+      "claim": "Every time someone searches, an auction runs, and your ad's eligibility and position are determined by Ad Rank, not bid alone.",
+      "kind": "sourced_fact",
+      "source_id": "S1",
+      "allowed_claim_id": "AC1"
+    },
+    {
+      "claim": "Ad Rank is recalculated for every single search, and it accounts for your bid, your ad quality, and the context of the search at that moment.",
+      "kind": "sourced_fact",
+      "source_id": "S1",
+      "allowed_claim_id": "AC3"
+    },
+    {
+      "claim": "Higher-quality ads tend to bring lower cost-per-click.",
+      "kind": "sourced_fact",
+      "source_id": "S1",
+      "allowed_claim_id": "AC5"
+    },
+    {
+      "claim": "Search campaigns show text ads to people actively searching for what you offer.",
+      "kind": "sourced_fact",
+      "source_id": "S4",
+      "allowed_claim_id": "AC19"
+    },
+    {
+      "claim": "Display campaigns put visual ads in front of people as they browse other sites and apps.",
+      "kind": "sourced_fact",
+      "source_id": "S4",
+      "allowed_claim_id": "AC22"
+    },
+    {
+      "claim": "Performance Max is a newer campaign type that runs across Google's full inventory and optimizes automatically based on conversion goals.",
+      "kind": "sourced_fact",
+      "source_id": "S4",
+      "allowed_claim_id": "AC20"
+    },
+    {
+      "claim": "Matching the campaign type to your goal before you spend is worth the time.",
+      "kind": "sourced_fact",
+      "source_id": "S4",
+      "allowed_claim_id": "AC17"
+    },
+    {
+      "claim": "Google Ads can track whether someone who clicked your ad actually called, filled out a form, or made a purchase.",
+      "kind": "sourced_fact",
+      "source_id": "S3",
+      "allowed_claim_id": "AC13"
+    },
+    {
+      "claim": "You can track phone calls from the ad itself, form submissions on your site, and other actions separately, so you know which ones are coming from which source.",
+      "kind": "sourced_fact",
+      "source_id": "S3",
+      "allowed_claim_id": "AC15"
+    },
+    {
+      "claim": "Google doesn't accept payment to rank a site higher or crawl it more frequently.",
+      "kind": "sourced_fact",
+      "source_id": "S2",
+      "allowed_claim_id": "AC10"
+    },
+    {
+      "claim": "Brandible's Google Ads setup fee is $600.",
+      "kind": "first_party"
+    },
+    {
+      "claim": "Brandible charges 15% of ad spend for campaign management.",
+      "kind": "first_party"
+    },
+    {
+      "claim": "Brandible's minimum recommended monthly ad spend is around $400 to $500.",
+      "kind": "first_party"
+    },
+    {
+      "claim": "Ad spend is billed directly to Google and is separate from Brandible's management fee.",
+      "kind": "first_party"
+    },
+    {
+      "claim": "For PEAC Learning, Brandible's published portfolio metrics show Google Ads CPC dropped from $4.02 to $0.19 (Q2 2023 to Q2 2025), a 95% decrease.",
+      "kind": "first_party"
+    },
+    {
+      "claim": "For PEAC Learning, Google Ads impressions grew from 1,963 to 72,309 and clicks from 74 to 968.",
+      "kind": "first_party"
+    },
+    {
+      "claim": "Without conversion tracking, a small business cannot determine whether ad spend produced actual customers or tell the platform's algorithm what a good outcome looks like.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "More budget does not fix a campaign that lacks proper structure or a landing page that doesn't convert.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "Local service businesses often find Search campaigns a better starting point than Display because search intent is already present.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "Performance Max requires clean conversion tracking to optimize effectively; without it, the system cannot measure meaningful signals.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "If a business stops ad spend, the ads stop; Google Ads spend does not build organic search rankings over time.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "If keywords targeted broad, unrelated searches and conversion tracking was not installed correctly, the problem is structural, not a matter of increasing budget.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "A landing page that does not match what the ad promised is a common reason clicks do not turn into calls or inquiries.",
+      "kind": "opinion"
+    }
+  ],
+  "repairs": [],
+  "internal_links_catalog_note": "Internal URLs in the article must come from the approved catalog of live posts, services, and core pages."
+}
