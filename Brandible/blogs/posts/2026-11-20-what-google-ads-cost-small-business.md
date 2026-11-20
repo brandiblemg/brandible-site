@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 title: "What Google Ads Really Cost a Small Business"
 slug: "what-google-ads-cost-small-business"
 date: 2026-11-20T02:24:08.031Z
@@ -22,7 +22,7 @@ Here's what Google Ads actually costs a small business, what's separate from the
 
 This is where a lot of owners get burned the first time. When you run Google Ads, you're paying for two different things.
 
-**Ad spend** goes directly to Google. That's the budget you set, and Google draws from it every time someone clicks your ad. You're not paying for impressions or placement upfront. You're paying per click, and your maximum bid is what you're willing to pay for each one. [Source](https://support.google.com/google-ads/answer/1722122?hl=en) How much you actually pay per click is often less than that maximum, depending on the auction.
+**Ad spend** goes directly to Google. That's the budget you set, and Google draws from it every time someone clicks your ad. With the standard cost-per-click setup small businesses use, you pay when someone clicks, and your maximum bid is the most you're willing to pay for each click. [Source](https://support.google.com/google-ads/answer/1722122?hl=en) How much you actually pay per click is often less than that maximum, depending on the auction.
 
 **Management** is what you pay the person or agency running the campaign. That covers strategy, campaign setup, copywriting, keyword selection, ongoing optimization, and reading the results. It's a separate cost, billed separately, and it doesn't go to Google at all.
 
@@ -34,7 +34,7 @@ Google doesn't just hand the top spot to whoever bids the most. Every time someo
 
 Ad Rank is recalculated for every single search, and it accounts for your bid, your ad quality, and the context of the search at that moment. [Source](https://support.google.com/google-ads/answer/1722122?hl=en) That means a well-written, relevant ad can outrank a higher bid from a competitor who hasn't done the work.
 
-The practical implication: quality matters to your costs. Higher-quality ads tend to bring lower cost-per-click. [Source](https://support.google.com/google-ads/answer/1722122?hl=en) This is why just increasing your budget on a poorly structured campaign doesn't fix much. You're paying more for the same results, or worse.
+The practical implication: quality matters to your costs. Higher-quality ads can often lead to a lower cost-per-click. [Source](https://support.google.com/google-ads/answer/1722122?hl=en) This is why just increasing your budget on a poorly structured campaign doesn't fix much. You're paying more for the same results, or worse.
 
 ## What a Realistic Budget Looks Like
 
