@@ -9,7 +9,7 @@ meta_description: "Google Ads cost more than the click. Learn what you're actual
 excerpt: "If you've run Google Ads and walked away with a bill and no calls, you're not alone. Here's what the spend actually covers, what's billed separately, and what has to be in place before more budget helps."
 category: "Marketing"
 featured_image: /assets/blog-images/what-google-ads-cost-small-business.webp
-featured_image_alt: "A sculptural matte dark navy workshop bench displaying a precision brass flow-meter gauge connected to a solid brass desk phone cradle."
+featured_image_alt: "Brass pipes connect a glowing orange gauge to a brass telephone on a dark navy bench."
 ---
 
 You ran Google Ads. You got charged. The phone didn't ring much, or at all. Now you're wondering whether the whole thing is a scam or whether you just did it wrong.
