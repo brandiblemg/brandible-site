@@ -1,8 +1,6 @@
 name: Brandible blog draft
 
 on:
-  schedule:
-    - cron: '0 14 * * 2'
   workflow_dispatch:
     inputs:
       topic_id:
