@@ -384,7 +384,7 @@ function buildPrBody(payload) {
     `- **Article:** \`${payload.postRel}\``,
     `- **Category:** ${payload.category}`,
     `- **Research:** ${researchStatus}`,
-    '- **Model revision:** None. GitHub automation uses one structured generation plus deterministic cleanup.',
+    '- **Model revision:** One revision pass when the first structured draft fails validation. Validator problems are fed back into that pass. Deterministic cleanup still fixes mechanical issues such as em dashes and unlabeled Brandible prices.',
     `- **Image model:** ${payload.imageModel}`,
     `- **Image:** \`${payload.imageRel}\``,
     `- **Facts verified:** ${payload.factsLastVerified}`,
@@ -457,7 +457,7 @@ function selectTopic(args, topics, occupied) {
 function generatePackage(topic) {
   const created = [];
   try {
-    const draftOut = runNodeScript(path.join(__dirname, 'draft-blog.js'), ['--topic', topic.id, '--deterministic']);
+    const draftOut = runNodeScript(path.join(__dirname, 'draft-blog.js'), ['--topic', topic.id]);
     const postPath = resolveCreatedPath(firstLineMatch(draftOut, /^Wrote (.+)$/m));
     const researchPath = resolveCreatedPath(firstLineMatch(draftOut, /^Research sidecar: (.+)$/m));
     if (!postPath) throw new Error('blog:draft did not report a written post path.');

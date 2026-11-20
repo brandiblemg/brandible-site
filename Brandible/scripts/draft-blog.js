@@ -62,7 +62,7 @@ function usage() {
     '',
     'If both API keys are set, BLOG_DRAFT_PROVIDER is required.',
     'Phase 2 research (web search + web fetch) runs on the Anthropic path when the topic needs outside facts.',
-    '--deterministic skips the LLM revision pass and uses the repair compiler only. GitHub automation always uses this mode.',
+    '--deterministic skips the LLM revision pass and uses the repair compiler only. Local debugging opt-in. GitHub automation does not pass this flag.',
     'Writes draft: true only. Does not publish, commit, or overwrite.'
   ].join('\n');
 }
@@ -671,27 +671,38 @@ async function generateFromTopic(topic, editorial, options) {
     }
     if (!deterministic) {
       console.log('Running the single revision pass.');
-      parsed = await completeArticle({
-        ...config,
-        prompt: buildRevisionPrompt(tokenized, problems, {
-          facts,
-          catalog,
-          sourcePack,
-          topic,
-          allowlist,
-          allowedClaims
-        }),
-        mode: 'revision'
-      });
-      const missingResolutions = assertRevisionResolutions(problems, parsed);
-      if (missingResolutions.length) {
-        fail(
-          `Revision rejected: missing or invalid resolutions. No draft written.\n- ${missingResolutions.join('\n- ')}`
-        );
+      let revised = null;
+      try {
+        revised = await completeArticle({
+          ...config,
+          prompt: buildRevisionPrompt(tokenized, problems, {
+            facts,
+            catalog,
+            sourcePack,
+            topic,
+            allowlist,
+            allowedClaims
+          }),
+          mode: 'revision'
+        });
+      } catch (error) {
+        const detail = error && error.message ? error.message : String(error);
+        console.log(`Revision pass failed (${detail}). Keeping the first draft for deterministic repair.`);
       }
-      tokenized = normalizeGenerated(parsed, topic);
-      article = assembleArticle(tokenized, allowedClaims);
-      problems = validateGeneratedArticle(article, ctx);
+      if (revised) {
+        const missingResolutions = assertRevisionResolutions(problems, revised);
+        if (missingResolutions.length) {
+          console.log(
+            'Revision rejected: missing or invalid resolutions. Keeping the first draft for deterministic repair.'
+          );
+          for (const line of missingResolutions) console.log(`  - ${line}`);
+        } else {
+          parsed = revised;
+          tokenized = normalizeGenerated(parsed, topic);
+          article = assembleArticle(tokenized, allowedClaims);
+          problems = validateGeneratedArticle(article, ctx);
+        }
+      }
     } else {
       console.log('Skipping model revision. Running deterministic repair compiler.');
     }
