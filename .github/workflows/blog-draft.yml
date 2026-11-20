@@ -26,22 +26,43 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Check automation switch
+        id: automation
+        env:
+          BLOG_AUTOMATION_ENABLED: ${{ vars.BLOG_AUTOMATION_ENABLED || 'true' }}
+        run: |
+          set -euo pipefail
+          raw="$(printf '%s' "$BLOG_AUTOMATION_ENABLED" | tr '[:upper:]' '[:lower:]' | tr -d '[:space:]')"
+          case "$raw" in
+            0|false|off|no)
+              echo "enabled=false" >> "$GITHUB_OUTPUT"
+              echo "Blog automation is disabled (BLOG_AUTOMATION_ENABLED). Skipping install, Gemini preflight, and draft generation."
+              ;;
+            *)
+              echo "enabled=true" >> "$GITHUB_OUTPUT"
+              ;;
+          esac
+
       - name: Setup Node.js
+        if: steps.automation.outputs.enabled == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: npm
 
       - name: Install dependencies
+        if: steps.automation.outputs.enabled == 'true'
         run: npm ci
 
       - name: Gemini preflight
+        if: steps.automation.outputs.enabled == 'true'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           BLOG_IMAGE_BRIEF_MODEL: ${{ vars.BLOG_IMAGE_BRIEF_MODEL || 'gemini-3.6-flash' }}
         run: node Brandible/scripts/blog-image-check.js
 
       - name: Generate draft package
+        if: steps.automation.outputs.enabled == 'true'
         id: generate
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -63,7 +84,7 @@ jobs:
           node Brandible/scripts/blog-automation.js "${ARGS[@]}"
 
       - name: Open draft pull request
-        if: ${{ steps.generate.outputs.skipped != 'true' }}
+        if: ${{ steps.automation.outputs.enabled == 'true' && steps.generate.outputs.skipped != 'true' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

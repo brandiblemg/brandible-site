@@ -11,6 +11,7 @@
     "blog:draft": "node Brandible/scripts/draft-blog.js",
     "blog:image": "node Brandible/scripts/blog-image.js",
     "blog:automation": "node Brandible/scripts/blog-automation.js",
+    "test": "node Brandible/scripts/blog-draft/contract-fixtures.js",
     "preview:blog": "node Brandible/scripts/preview-blog.js"
   },
   "dependencies": {

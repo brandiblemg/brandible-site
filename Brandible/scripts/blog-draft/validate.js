@@ -419,6 +419,17 @@ function numbersIn(text) {
   return String(text).match(/\d+(?:\.\d+)?/g) || [];
 }
 
+function excerptHasFigure(excerpt, num) {
+  const raw = String(excerpt || '');
+  if (raw.includes(num)) return true;
+  const protectedDecimals = raw.replace(/(\d)\.(\d)/g, '$1<$2');
+  const normalized = protectedDecimals
+    .toLowerCase()
+    .replace(/[^a-z0-9%<>]+/g, ' ')
+    .replace(/(\d)<(\d)/g, '$1.$2');
+  return normalized.includes(num);
+}
+
 function packEvidence(sourcePack, articleProduct) {
   return (sourcePack.sources || [])
     .filter((source) => productsCompatible(articleProduct, inferSourceProduct(source)))
@@ -482,7 +493,7 @@ function excerptSupportsClaim(claimText, excerpt) {
     }
   }
   for (const num of numbersIn(stripClaimFraming(claimText))) {
-    if (!evidence.includes(num)) {
+    if (!excerptHasFigure(excerpt, num)) {
       return {
         ok: false,
         reason: `Claim uses “${num}” but that figure is not in the stored source excerpt.`
@@ -490,6 +501,36 @@ function excerptSupportsClaim(claimText, excerpt) {
     }
   }
   return { ok: true };
+}
+
+function comparativesInClaimAreStored(claimText, excerpt) {
+  const evidence = String(excerpt || '');
+  for (const pattern of COMPARATIVE_PATTERNS) {
+    if (pattern.test(claimText) && !pattern.test(evidence)) return false;
+  }
+  for (const word of ['twice', 'double', 'triple']) {
+    const re = new RegExp(`\\b${word}\\b`, 'i');
+    if (re.test(claimText) && !re.test(evidence)) return false;
+  }
+  return true;
+}
+
+function boundExcerptSupportsClaim(claimText, excerpt) {
+  const strict = excerptSupportsClaim(claimText, excerpt);
+  if (strict.ok) return strict;
+  if (normalizeEvidence(excerpt).length < 20) return strict;
+  for (const num of numbersIn(stripClaimFraming(claimText))) {
+    if (!excerptHasFigure(excerpt, num)) return strict;
+  }
+  if (!comparativesInClaimAreStored(claimText, excerpt)) return strict;
+  if (claimStrongerThanSource(claimText, excerpt)) return strict;
+  const terms = significantTerms(stripClaimFraming(claimText));
+  if (terms.length) {
+    const evidence = normalizeEvidence(excerpt);
+    const hits = terms.filter((term) => evidenceHasTerm(evidence, term));
+    if (hits.length < Math.min(3, terms.length)) return strict;
+  }
+  return { ok: true, relaxed: true };
 }
 
 function claimStrongerThanSource(claimText, excerpt) {
@@ -595,6 +636,7 @@ function checkClaims(article, sourcePack, articleProduct, allowedClaims) {
       continue;
     }
     const excerpt = sourceEvidenceText(source);
+    const allowedForClaim = plan.length ? findAllowedClaim(plan, claim.allowed_claim_id) : null;
     const sourceProduct = inferSourceProduct(source);
     const statedProduct = claimProduct(text) || articleProduct;
     if (sourceProduct === 'local_services_ads' && statedProduct === 'google_business_profile') {
@@ -608,7 +650,9 @@ function checkClaims(article, sourcePack, articleProduct, allowedClaims) {
         message: `sourced_fact uses a ${sourceProduct} source for a ${statedProduct} claim: “${text}” (${sourceId})`
       });
     }
-    const entailment = excerptSupportsClaim(text, excerpt);
+    const entailment = allowedForClaim
+      ? boundExcerptSupportsClaim(text, excerpt)
+      : excerptSupportsClaim(text, excerpt);
     if (!entailment.ok) {
       problems.push({
         code: 'V3_SOURCE_ENTAILMENT',
@@ -940,7 +984,7 @@ function checkRenderedCitations(article, sourcePack, allowedClaims) {
     const evidence = `${allowed.evidence || ''} ${allowed.claim || ''} ${allowed.safe_wording || ''}`.trim();
     const source = findSource(sourcePack, allowed.source_id);
     const excerpt = source ? sourceEvidenceText(source) : evidence;
-    const entailment = excerptSupportsClaim(display, excerpt);
+    const entailment = boundExcerptSupportsClaim(display, excerpt);
     if (!entailment.ok) {
       problems.push({
         code: 'V3_SOURCE_ENTAILMENT',
@@ -1513,6 +1557,8 @@ module.exports = {
   allowedActionsForCode,
   formatProblem,
   formatV4Diagnostics,
+  excerptSupportsClaim,
+  boundExcerptSupportsClaim,
   splitSentences: segmentMarkdownSentences,
   segmentMarkdownSentences,
   isMarkdownHeading

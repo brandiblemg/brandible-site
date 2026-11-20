@@ -20,9 +20,11 @@ const {
   validateGeneratedArticle,
   assertRevisionResolutions,
   stampProblems,
-  splitSentences
+  splitSentences,
+  excerptSupportsClaim,
+  boundExcerptSupportsClaim
 } = require('./validate');
-const { applySafetyFallback, collectSafetyRepairs, dedupeInternalLink, MAX_DELETED_SEGMENTS, MAX_DETERMINISTIC_ROUNDS, runDeterministicRepairsToFixedPoint } = require('./safety-fallback');
+const { applySafetyFallback, collectSafetyRepairs, dedupeInternalLink, MAX_DELETED_SEGMENTS, MAX_DETERMINISTIC_ROUNDS, runDeterministicRepairsToFixedPoint, compileRepairs, quotedFromMessage } = require('./safety-fallback');
 const { segmentMarkdownSentences, isMarkdownHeading } = require('./segments');
 const { extractMarkdownLinks, extractMarkdownHrefs } = require('./markdown-links');
 const { conciseGeminiError } = require('../blog-image-check');
@@ -547,11 +549,11 @@ async function structuredOutputFixtures() {
   );
   const automationSrc = fs.readFileSync(path.join(__dirname, '../blog-automation.js'), 'utf8');
   assert(
-    'GitHub automation makes zero revision-model calls',
-    /'--deterministic'/.test(automationSrc) &&
+    'GitHub automation does not force --deterministic',
+    !/'--deterministic'/.test(automationSrc) &&
       !/mode: 'revision'/.test(automationSrc) &&
-      !/Running the single revision pass/.test(automationSrc) &&
-      /one structured generation plus deterministic cleanup/.test(automationSrc)
+      /One revision pass when the first structured draft fails validation/.test(automationSrc) &&
+      /draft-blog\.js'\)\s*,\s*\['--topic',\s*topic\.id\]/.test(automationSrc)
   );
 
   geminiPreflightFixtures();
@@ -563,11 +565,31 @@ function geminiPreflightFixtures() {
   const checkSrc = fs.readFileSync(checkPath, 'utf8');
   const preflightIdx = workflowSrc.indexOf('name: Gemini preflight');
   const generateIdx = workflowSrc.indexOf('name: Generate draft package');
+  const switchIdx = workflowSrc.indexOf('name: Check automation switch');
+  const installIdx = workflowSrc.indexOf('run: npm ci');
   assert(
     'workflow runs Gemini preflight before Generate draft package',
     preflightIdx !== -1 && generateIdx !== -1 && preflightIdx < generateIdx &&
       /run: node Brandible\/scripts\/blog-image-check\.js/.test(workflowSrc),
     'Gemini preflight step missing or out of order'
+  );
+  assert(
+    'automation switch runs before npm ci and Gemini preflight',
+    switchIdx !== -1 && installIdx !== -1 && switchIdx < installIdx && switchIdx < preflightIdx &&
+      /BLOG_AUTOMATION_ENABLED/.test(workflowSrc.slice(switchIdx, installIdx)),
+    'automation switch is missing or ordered after install'
+  );
+  assert(
+    'install, Gemini preflight, and draft generation are skipped when automation is disabled',
+    /name: Install dependencies\n\s+if: steps\.automation\.outputs\.enabled == 'true'/.test(workflowSrc) &&
+      /name: Gemini preflight\n\s+if: steps\.automation\.outputs\.enabled == 'true'/.test(workflowSrc) &&
+      /name: Generate draft package\n\s+if: steps\.automation\.outputs\.enabled == 'true'/.test(workflowSrc),
+    'expensive steps are not gated on the automation switch'
+  );
+  assert(
+    'Tuesday schedule block is unchanged by this fix',
+    /schedule:\n\s+- cron: '0 14 \* \* 2'/.test(workflowSrc),
+    'do not remove the cron here; pause PR #14 owns that fallback'
   );
   assert(
     'preflight script uses the shared Gemini client and env helpers',
@@ -3250,6 +3272,11 @@ async function run() {
       calls: v4RoundCalls
     })
   );
+  assert(
+    'later refusal keeps earlier-round fixes',
+    !/Everyone assumes the listing fixes itself/.test(String(v4RoundResult.article.body || '')),
+    v4RoundResult.article.body
+  );
 
   const migratePack = {
     needed: true,
@@ -3631,6 +3658,201 @@ async function run() {
       /See a random blog/.test(unapprovedFallback.article.body) &&
       !unapprovedFallback.article.body.includes('https://example.com/not-approved'),
     unapprovedFallback.article.body
+  );
+
+  const budgetExcerpt =
+    'You have control over your Google Ads budget. You decide the average amount you want to spend each day. On the days when your ad is more popular, Google Ads will allow up to twice your average daily budget so you will not miss out on those valuable clicks. But do not worry, over the course of a month, you will not be charged more than your average daily budget times the average number of days in a month (30.4).';
+  const monthlySentence =
+    'But do not worry, over the course of a month, you will not be charged more than your average daily budget times the average number of days in a month (30.4).';
+  const budgetParaphrase =
+    'Across a full month, your total charge will not exceed your average daily budget multiplied by the average number of days in a month.';
+  const budgetPackNov17 = {
+    needed: true,
+    sources: [
+      {
+        id: 'S2',
+        url: 'https://support.google.com/google-ads/answer/2375454',
+        title: 'About average daily budgets',
+        excerpt: budgetExcerpt,
+        evidence: [{ about: 'monthly charge', quote: monthlySentence }]
+      }
+    ]
+  };
+  const budgetClaimsNov17 = buildAllowedClaims(budgetPackNov17);
+  const monthlyClaim = budgetClaimsNov17.find((item) => /30\.4/.test(`${item.evidence || ''} ${item.safe_wording || ''}`));
+  assert('Nov 17 pack exposes the 30.4 monthly budget claim', Boolean(monthlyClaim), JSON.stringify(budgetClaimsNov17.map((item) => item.id)));
+  assert(
+    'literal 30.4 wording is supported by the stored excerpt',
+    excerptSupportsClaim(monthlySentence, budgetExcerpt).ok === true,
+    JSON.stringify(excerptSupportsClaim(monthlySentence, budgetExcerpt))
+  );
+  assert(
+    'faithful monthly-budget paraphrase is supported when bound to that claim',
+    boundExcerptSupportsClaim(budgetParaphrase, budgetExcerpt).ok === true &&
+      excerptSupportsClaim(budgetParaphrase, budgetExcerpt).ok === false,
+    JSON.stringify({
+      bound: boundExcerptSupportsClaim(budgetParaphrase, budgetExcerpt),
+      strict: excerptSupportsClaim(budgetParaphrase, budgetExcerpt)
+    })
+  );
+  assert(
+    'invented 99.9 figure is still rejected',
+    excerptSupportsClaim(
+      'Across a full month, your total charge will not exceed 99.9 times the average daily budget.',
+      budgetExcerpt
+    ).ok === false &&
+      boundExcerptSupportsClaim(
+        'Across a full month, your total charge will not exceed 99.9 times the average daily budget.',
+        budgetExcerpt
+      ).ok === false,
+    JSON.stringify(
+      boundExcerptSupportsClaim(
+        'Across a full month, your total charge will not exceed 99.9 times the average daily budget.',
+        budgetExcerpt
+      )
+    )
+  );
+  assert(
+    'unrelated learning-period sentence is still rejected',
+    boundExcerptSupportsClaim('Budgeting for a learning period matters a great deal here.', budgetExcerpt).ok === false
+  );
+
+  function nov17Article(sentence) {
+    return assembleArticle(
+      {
+        ...baseFields(),
+        title: 'What Google Ads really cost a small business',
+        slug: 'what-google-ads-really-cost-a-small-business',
+        meta_title: 'What Google Ads really cost a small business',
+        category: 'Marketing',
+        excerpt: 'Get the tracking and the landing page honest before you add more budget to the campaign.',
+        meta_description:
+          'A practical order of operations for local shops that want paid clicks to turn into calls, not just more spend.',
+        body: [
+          '## Monthly budget',
+          '',
+          OPERATIONAL_PADDING,
+          '',
+          OPERATIONAL_PADDING,
+          '',
+          'Keeping spend honest matters.',
+          `${sentence} {{${monthlyClaim.id}}}`,
+          'That does not mean raising the bid first.',
+          '',
+          'If tracking is already in place, you may not need Brandible. If it is not, Brandible can set it up.'
+        ].join('\n'),
+        claims: [],
+        cta: {
+          names_brandible: true,
+          fit_case: 'If it is not, Brandible can set it up.',
+          walk_away_case: 'If tracking is already in place, you may not need Brandible.'
+        }
+      },
+      budgetClaimsNov17
+    );
+  }
+  const paraphraseArticle = nov17Article(budgetParaphrase);
+  const paraphraseProblems = validateGeneratedArticle(paraphraseArticle, ctx(budgetPackNov17, budgetClaimsNov17));
+  assert(
+    'Nov 17 paraphrase does not fail source entailment',
+    paraphraseProblems.length === 0,
+    paraphraseProblems.map((item) => `${item.id}: ${item.message}`).join(' | ')
+  );
+  const literalArticle = nov17Article(monthlySentence.replace(/\.$/, ''));
+  const literalProblems = validateGeneratedArticle(literalArticle, ctx(budgetPackNov17, budgetClaimsNov17));
+  assert(
+    'Nov 17 literal 30.4 sentence does not fail source entailment',
+    literalProblems.length === 0,
+    literalProblems.map((item) => `${item.id}: ${item.message}`).join(' | ')
+  );
+  const inventedArticle = nov17Article(
+    'Across a full month, your total charge will not exceed 99.9 times the average daily budget'
+  );
+  const inventedProblems = validateGeneratedArticle(inventedArticle, ctx(budgetPackNov17, budgetClaimsNov17));
+  assert(
+    'Nov 17 invented 99.9 still fails source entailment',
+    hasCode(inventedProblems, 'V3_SOURCE_ENTAILMENT') &&
+      inventedProblems.some((item) => /99\.9/.test(item.message)),
+    inventedProblems.map((item) => `${item.id}: ${item.message}`).join(' | ')
+  );
+
+  const nov17Message =
+    'sourced_fact is not supported by the stored excerpt (S2): Claim uses “30.4” but that figure is not in the stored source excerpt. Claim: “You have control over your Google Ads budget. You decide the average amount you want to spend each day. On the days when your ad is more popular, Google Ads will allow up to twice your average daily budget so you will not miss out on those valuable clicks. But do not worry, over the course of a month, you will not be charged more than your average daily budget times the average number of days in a month (30.4).”';
+  assert(
+    'quotedFromMessage returns the Claim text, not the inner 30.4 span',
+    quotedFromMessage(nov17Message) ===
+      'You have control over your Google Ads budget. You decide the average amount you want to spend each day. On the days when your ad is more popular, Google Ads will allow up to twice your average daily budget so you will not miss out on those valuable clicks. But do not worry, over the course of a month, you will not be charged more than your average daily budget times the average number of days in a month (30.4).',
+    quotedFromMessage(nov17Message)
+  );
+  assert(
+    'quotedFromMessage still returns the first quote when no Claim label is present',
+    quotedFromMessage('Unsupported quantifier in body: “everyone”.') === 'everyone'
+  );
+
+  const dumpSentence = budgetParaphrase;
+  const dumpClaims = budgetClaimsNov17.map((item) =>
+    item.id === monthlyClaim.id
+      ? { ...item, claim: budgetExcerpt, safe_wording: budgetExcerpt, evidence: budgetExcerpt }
+      : item
+  );
+  const dumpProblem = {
+    code: 'V3_SOURCE_ENTAILMENT',
+    message:
+      `User-facing sourced wording is not supported by approved claim ${monthlyClaim.id}: ` +
+      `Stored excerpt does not support the exact claim. Claim: “${dumpSentence}”`
+  };
+  const dumpFallback = applySafetyFallback(paraphraseArticle, [dumpProblem], { allowedClaims: dumpClaims });
+  assert(
+    'V3 repair deletes an unentailed sentence instead of dumping the 30.4 excerpt',
+    dumpFallback.refused === false &&
+      dumpFallback.applied.includes('v3_body') &&
+      !dumpFallback.applied.includes('v6_replace_token') &&
+      !dumpFallback.article.body.includes(dumpSentence) &&
+      !dumpFallback.article.body.includes('30.4') &&
+      !/You have control over your Google Ads budget/.test(dumpFallback.article.body),
+    JSON.stringify({ applied: dumpFallback.applied, body: dumpFallback.article.body, reason: dumpFallback.reason })
+  );
+
+  const mixedArticle = {
+    ...tokenArticle,
+    title: 'What to check before you raise ad spend, tracking'
+  };
+  mixedArticle.title = 'What to check before you raise ad spend \u2014 tracking';
+  const mixedCompiled = compileRepairs(
+    mixedArticle,
+    [
+      { code: 'V10_OTHER', message: 'Contains an em dash.' },
+      {
+        code: 'V4_MISSING_SOURCE_LINK',
+        message:
+          'Approved claim AC1 is missing its reader-facing source link: “Ad Rank is recalculated.” Code should insert a markdown link to https://support.google.com/google-ads/answer/1722122.'
+      }
+    ],
+    { allowedClaims: adsAllowed }
+  );
+  assert(
+    'compileRepairs applies the em dash repair and skips the unrepairable V4',
+    mixedCompiled.refused === false &&
+      mixedCompiled.repairs.some((item) => item.type === 'em_dash') &&
+      mixedCompiled.skipped.length === 1 &&
+      mixedCompiled.skipped[0].problem.code === 'V4_MISSING_SOURCE_LINK',
+    JSON.stringify(mixedCompiled)
+  );
+  const mixedApplied = applySafetyFallback(mixedArticle, [
+    { code: 'V10_OTHER', message: 'Contains an em dash.' },
+    {
+      code: 'V4_MISSING_SOURCE_LINK',
+      message:
+        'Approved claim AC1 is missing its reader-facing source link: “Ad Rank is recalculated.” Code should insert a markdown link to https://support.google.com/google-ads/answer/1722122.'
+    }
+  ]);
+  assert(
+    'incremental fallback keeps the em dash repair when V4 cannot be repaired',
+    mixedApplied.refused === false &&
+      mixedApplied.applied.includes('em_dash') &&
+      !String(mixedApplied.article.title).includes('\u2014') &&
+      String(mixedApplied.article.title).includes(','),
+    JSON.stringify({ applied: mixedApplied.applied, title: mixedApplied.article.title, reason: mixedApplied.reason })
   );
 
   if (failed) {

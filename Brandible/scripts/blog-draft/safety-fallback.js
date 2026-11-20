@@ -88,8 +88,16 @@ function uniquelyMatchingAllowedClaim(sentence, allowedClaims) {
 }
 
 function quotedFromMessage(message) {
-  const match = String(message || '').match(/“([^”]+)”|"([^"]+)"/);
-  return match ? match[1] || match[2] : null;
+  const text = String(message || '');
+  const labeled = text.match(/Claim:\s*(?:“([^”]*)”|"([^"]*)")/);
+  if (labeled) {
+    const claim = (labeled[1] || labeled[2] || '').trim();
+    if (claim) return claim;
+  }
+  const match = text.match(/“([^”]*)”|"([^"]*)"/);
+  if (!match) return null;
+  const quote = (match[1] || match[2] || '').trim();
+  return quote || null;
 }
 
 function extractAcId(message) {
@@ -171,6 +179,27 @@ function findShortestSegmentContaining(body, quoted) {
   return best;
 }
 
+function findRepairSpan(body, quoted) {
+  const raw = String(body || '');
+  const quote = String(quoted || '');
+  if (!quote) return null;
+  if (raw.includes(quote)) return quote;
+  return findShortestSegmentContaining(raw, quote);
+}
+
+function approvedWording(allowed) {
+  return String((allowed && (allowed.safe_wording || allowed.claim)) || '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function wordingIsEvidenceDump(wording) {
+  const text = String(wording || '').replace(/\s+/g, ' ').trim();
+  if (!text) return false;
+  const parts = text.split(/(?<=[.!?])\s+/).filter((item) => item.trim().length >= 24);
+  return parts.length >= 2 || text.length >= 240;
+}
+
 function bodyHasText(article, text) {
   if (!text) return false;
   return String((article && article.body) || '').includes(text);
@@ -210,7 +239,10 @@ function deleteSentenceFromBody(body, sentence) {
 }
 
 function replaceEmDashes(value) {
-  return String(value || '').split(EM_DASH).join('-');
+  return String(value || '')
+    .replace(/[ \t]*\u2014[ \t]*/g, ', ')
+    .replace(/[ \t]{2,}/g, ' ')
+    .replace(/\s+,/g, ',');
 }
 
 function clipFrontmatterText(value, maxLength) {
@@ -508,8 +540,12 @@ function repairForProblem(article, problem, options) {
   if (code === 'V3_SOURCE_ENTAILMENT') {
     const quoted = quotedFromMessage(message);
     const tokenId = extractAcId(message);
-    const sentence = quoted ? findShortestSegmentContaining(body, quoted) : null;
-    if (tokenId && findAllowedClaim(allowedClaims, tokenId) && sentence) {
+    const sentence = quoted ? findRepairSpan(body, quoted) : null;
+    const allowed = tokenId ? findAllowedClaim(allowedClaims, tokenId) : null;
+    if (allowed && sentence) {
+      if (wordingIsEvidenceDump(approvedWording(allowed))) {
+        return deletionRepair('v3_body', problem, sentence, 'unsupported source entailment');
+      }
       return {
         type: 'v6_replace_token',
         code,
@@ -597,6 +633,7 @@ function repairForProblem(article, problem, options) {
 
 function compileRepairs(article, problems, options) {
   const repairs = [];
+  const skipped = [];
   const seen = new Set();
   function remember(key) {
     if (seen.has(key)) return false;
@@ -606,13 +643,25 @@ function compileRepairs(article, problems, options) {
   for (const problem of problems || []) {
     const repair = repairForProblem(article, problem, options);
     if (!repair || repair.type === 'refuse') {
-      return { repairs: [], refused: true, reason: (repair && repair.reason) || String((problem && problem.message) || 'unrepairable') };
+      skipped.push({
+        problem,
+        reason: (repair && repair.reason) || String((problem && problem.message) || 'unrepairable')
+      });
+      continue;
     }
     const key = `${repair.type}:${repair.field || repair.href || repair.tokenId || repair.sentence || repair.quote || repair.reason}`;
     if (!remember(key)) continue;
     repairs.push(repair);
   }
-  return { repairs, refused: false, reason: null };
+  if (!repairs.length && skipped.length) {
+    return { repairs, skipped, refused: true, reason: skipped[0].reason };
+  }
+  return {
+    repairs,
+    skipped,
+    refused: false,
+    reason: skipped.length ? skipped[0].reason : null
+  };
 }
 
 function collectSafetyRepairs(article, problems, options) {
@@ -753,7 +802,19 @@ function applySafetyFallback(article, problems, options) {
     if (repair.type === 'v6_replace_token') {
       if (bodyHasText(next, repair.sentence) && repair.tokenId) {
         const allowed = findAllowedClaim(allowedClaims, repair.tokenId);
-        const wording = String((allowed && (allowed.safe_wording || allowed.claim)) || '').replace(/\s+/g, ' ').trim();
+        const wording = approvedWording(allowed);
+        if (wordingIsEvidenceDump(wording)) {
+          const before = String(next.body || '');
+          const after = deleteSentenceFromBody(before, repair.sentence);
+          if (after !== before) {
+            deletedSegments += 1;
+            deletedChars += String(repair.sentence || '').length;
+            next = { ...next, body: after };
+          }
+          applied.push('v3_body');
+          audit.push({ ...auditFor(repair), action: 'deleted_segment', reason: 'refused to dump evidence quote' });
+          continue;
+        }
         const replacement = wording ? `${wording} {{${repair.tokenId}}}` : `{{${repair.tokenId}}}`;
         next = { ...next, body: String(next.body).replace(repair.sentence, replacement) };
         needsAssemble = true;
@@ -914,7 +975,7 @@ function runDeterministicRepairsToFixedPoint(input) {
   for (let round = 1; round <= MAX_DETERMINISTIC_ROUNDS; round += 1) {
     const fingerprint = fingerprintProblems(problems);
     if (seenFingerprints.has(fingerprint)) {
-      return refuseFixedPoint(article0, audit, 'Repeated identical validation state after a repair', {
+      return refuseFixedPoint(article, audit, 'Repeated identical validation state after a repair', {
         rounds: round,
         deletedSegments: totalDeletedSegments,
         deletedChars: totalDeletedChars,
@@ -933,7 +994,7 @@ function runDeterministicRepairsToFixedPoint(input) {
       priorDeletedChars: totalDeletedChars
     });
     if (fallback.refused) {
-      return refuseFixedPoint(article0, audit, fallback.reason, {
+      return refuseFixedPoint(article, audit, fallback.reason, {
         rounds: round,
         deletedSegments: fallback.deletedSegments,
         deletedChars: fallback.deletedChars,
@@ -942,7 +1003,7 @@ function runDeterministicRepairsToFixedPoint(input) {
       });
     }
     if (!fallback.applied.length && !fallback.repairs.length) {
-      return refuseFixedPoint(article0, audit, 'No deterministic repair produced for current problems', {
+      return refuseFixedPoint(article, audit, 'No deterministic repair produced for current problems', {
         rounds: round,
         deletedSegments: totalDeletedSegments,
         deletedChars: totalDeletedChars,
@@ -951,7 +1012,7 @@ function runDeterministicRepairsToFixedPoint(input) {
       });
     }
     if (snapshotArticle(fallback.article) === before) {
-      return refuseFixedPoint(article0, audit, 'Repair round made no article change', {
+      return refuseFixedPoint(article, audit, 'Repair round made no article change', {
         rounds: round,
         deletedSegments: totalDeletedSegments,
         deletedChars: totalDeletedChars,
@@ -989,7 +1050,7 @@ function runDeterministicRepairsToFixedPoint(input) {
   }
 
   return refuseFixedPoint(
-    article0,
+    article,
     audit,
     `Exceeded ${MAX_DETERMINISTIC_ROUNDS} deterministic repair rounds`,
     {
@@ -1011,5 +1072,6 @@ module.exports = {
   runDeterministicRepairsToFixedPoint,
   fingerprintProblems,
   dedupeInternalLink,
-  compileRepairs
+  compileRepairs,
+  quotedFromMessage
 };
