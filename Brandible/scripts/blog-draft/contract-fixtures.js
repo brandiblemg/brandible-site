@@ -587,9 +587,9 @@ function geminiPreflightFixtures() {
     'expensive steps are not gated on the automation switch'
   );
   assert(
-    'Tuesday schedule block is unchanged by this fix',
-    /schedule:\n\s+- cron: '0 14 \* \* 2'/.test(workflowSrc),
-    'do not remove the cron here; pause PR #14 owns that fallback'
+    'workflow runs only on workflow_dispatch (no GitHub cron)',
+    !/^\s*schedule\s*:/m.test(workflowSrc) && /^\s*workflow_dispatch\s*:/m.test(workflowSrc),
+    'workflow must be started by workflow_dispatch and must not define a schedule'
   );
   assert(
     'preflight script uses the shared Gemini client and env helpers',
