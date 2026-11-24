@@ -1,8 +1,8 @@
 name: Brandible blog draft
 
+# Started by workflow_dispatch only. A Tuesday 6:30 AM ET scheduler dispatches it;
+# GitHub's own cron ran 5-9 hours late and is no longer used.
 on:
-  schedule:
-    - cron: '0 14 * * 2'
   workflow_dispatch:
     inputs:
       topic_id:
