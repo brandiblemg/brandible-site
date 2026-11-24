@@ -1,0 +1,89 @@
+{
+  "post": "2026-11-24-logo-vs-brand-identity.md",
+  "topic_id": "10",
+  "generated_at": "2026-11-24T23:21:43.040Z",
+  "facts_last_verified": "2026-08-31",
+  "research": {
+    "needed": false,
+    "skipped_reason": "Topic does not require outside facts. Use first-party facts, opinion, and hypotheticals only.",
+    "queries": [],
+    "retrieved_at": "2026-11-24T23:19:41.859Z"
+  },
+  "sources": [],
+  "allowed_claims": [],
+  "claim_tokens_used": [],
+  "approved_first_party_numbers": {
+    "money": [
+      0.19,
+      4.02,
+      400,
+      500,
+      600,
+      750,
+      1500,
+      2000,
+      3500,
+      5000,
+      10000
+    ],
+    "percents": [
+      15,
+      95
+    ],
+    "counts": [
+      2,
+      12,
+      13,
+      37,
+      74,
+      250,
+      968,
+      1963,
+      72309
+    ],
+    "timelines": [
+      "2–4 weeks",
+      "30 days"
+    ]
+  },
+  "claims": [
+    {
+      "claim": "Brandible's branding projects typically run $1,500 to $5,000+ depending on scope and deliverables. That is Brandible's range, not a market average.",
+      "kind": "first_party"
+    },
+    {
+      "claim": "Brandible branding work includes a primary logo and alternate formats, a color palette, typography choices, a voice and tone guide, and a brand style guide. Optional add-ons include business cards, stationery, and social profile graphics.",
+      "kind": "first_party"
+    },
+    {
+      "claim": "Brandible branding discovery focuses on what the business does, who it serves, and what it should feel like to work with the client, before producing deliverables.",
+      "kind": "first_party"
+    },
+    {
+      "claim": "A new logo placed on top of a brand system that isn't working is unlikely to fix an underlying consistency problem.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "When a business's website, social presence, proposals, and email signature look inconsistent with one another, customers can perceive the business as less established, which may make the decision to hire them harder.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "A brand system built for a specific business gives something that can be handed to a web designer, printer, social media manager, or new hire to maintain consistency.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "A logo purchased from a marketplace at a low price typically provides a file without a color system, usage rules, or design rationale; this may be sufficient if other brand elements are already established, but may not solve a credibility or consistency problem.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "If a strong brand identity is built but the website is outdated, the brand has limited ability to convert visitors, because the two elements work together.",
+      "kind": "opinion"
+    },
+    {
+      "claim": "A business with a solid, consistent brand system already in place may not need Brandible's branding service.",
+      "kind": "opinion"
+    }
+  ],
+  "repairs": [],
+  "internal_links_catalog_note": "Internal URLs in the article must come from the approved catalog of live posts, services, and core pages."
+}
