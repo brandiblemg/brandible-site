@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 title: "You Don't Need a New Logo. You Need a Brand People Can Recognize."
 slug: "logo-vs-brand-identity"
 date: 2026-11-24T23:21:43.039Z
@@ -9,7 +9,7 @@ meta_description: "A new logo won't fix inconsistency. Here's the difference bet
 excerpt: "If you're asking for a new logo, there's a good chance you actually need something bigger: a brand people can recognize anywhere they look. Here's how to tell the difference, and what a real brand system includes."
 category: "Business Tips"
 featured_image: /assets/blog-images/logo-vs-brand-identity.webp
-featured_image_alt: "A heavy matte-navy precision stamp tool resting on a dark workshop surface alongside several tactile touchpoints,a debossed card."
+featured_image_alt: "A matte navy stamp sits with cards, a box, and a tag, all edged in orange."
 ---
 
 The logo isn't usually the problem.
@@ -38,6 +38,7 @@ You don't need a Fortune 500 definition. For a local service business, branding 
 It's the system that answers two questions every time a customer encounters you:
 
 **Is this the same company I saw before?**
+
 **Do I trust them enough to call?**
 
 That system includes your logo, yes. But it also includes your colors, your typography, the way you write, the way you speak on the phone, how your website looks compared to your invoice, and what someone sees when they search your name.
@@ -78,13 +79,13 @@ A system problem doesn't get fixed by a new mark. It gets fixed by building the 
 
 ## What a Brand System Looks Like
 
-At Brandible, branding work starts with a discovery process. What does the business actually do? Who does it serve? What should it feel like to work with you?
+At Brandible, branding work starts with brand discovery and positioning aligned to your mission, values, and audience.
 
-From there, the deliverables include a primary logo and alternate formats, a color palette, typography choices, and a voice and tone guide. Everything gets documented in a brand style guide so the system stays consistent whether it's on your website, your truck wrap, or a social post your assistant schedules on a Tuesday.
+From there, the deliverables include a primary logo and alternate concepts for print, digital, and social, a color palette and typography system, and voice, tone, and visual guidelines. A brand style guide PDF is included.
 
 Optional add-ons like business cards, stationery, and social profile graphics give the new identity somewhere to live right away.
 
-Brandible's branding projects typically run $1,500 to $5,000+, depending on scope and deliverables. That is our range, not a market average. A simple identity refresh for a business that already has direction looks different from a full brand build for a company launching into a new market.
+Brandible's branding projects typically run $1,500 to $5,000+, depending on scope and deliverables. That is our range, not a market average. Refreshing an existing brand looks different from launching something new.
 
 ## The Honest Version of This Conversation
 
