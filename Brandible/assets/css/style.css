@@ -16,8 +16,16 @@
   --brand-navy-700:    #16306B;
   --brand-electric:    #2563EB;
   --brand-sky:         #60A5FA;
-  --brand-orange:      #F97316;
-  --brand-orange-600:  #EA580C;
+  /* #F97316 on white is ~2.8:1. #C04A0C is the lightest orange that stays
+     on-hue and clears WCAG AA for both white text on the button (4.97:1)
+     and this orange as text on white (4.97:1) or cloud #F5F7FA (4.63:1). */
+  --brand-orange:      #C04A0C;
+  /* Hover / small labels. One step darker than --brand-orange so the
+     button hover still reads as pressed, and 13px labels clear AA on cloud. */
+  --brand-orange-600:  #A8430B;
+  /* Bright orange for the wordmark on navy. #F97316 is ~6.9:1 on #060D1F.
+     The AA orange above drops to ~3.9:1, which fails for the 14px copyright lockup. */
+  --brand-orange-bright: #F97316;
   --brand-cloud:       #F5F7FA;
   --font-display:      'League Spartan', ui-sans-serif, system-ui, sans-serif;
   --font-body:         'DM Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -1150,8 +1158,15 @@ a.ottorun-inline:focus-visible,
   line-height: 1;
   white-space: nowrap;
 }
-.wordmark .wm-i { color: var(--brand-orange); font-style: italic; }
-.wordmark .wm-bang { color: var(--brand-orange); }
+.wordmark .wm-i { color: var(--brand-orange-bright); font-style: italic; }
+.wordmark .wm-bang { color: var(--brand-orange-bright); }
+
+/* slate-500 (#64748B) is ~4.07:1 on navy-950 (#060D1F). 14px footer text needs 4.5:1.
+   #708096 is ~4.8:1 there and stays darker than the slate-400 links beside it.
+   Scoped to the navy footer so slate-500 on light backgrounds is unchanged. */
+footer.bg-navy-950 .text-slate-500 {
+  color: #708096;
+}
 
 /* ----- Hero ----- */
 .hero-v2 {
