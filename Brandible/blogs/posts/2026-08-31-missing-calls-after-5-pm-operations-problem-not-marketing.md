@@ -60,7 +60,7 @@ If the answer to both of those is "not great," that's the gap. It's not the ads.
 
 Adding a chat tool, setting up an auto-reply text, and building a basic follow-up sequence is not a technology project that takes months. It's a setup job.
 
-Brandible's AI and automation work typically runs $750 to $3,500+ depending on what's being built. That's a one-time setup range, not a monthly media spend. The tools are chosen based on what you actually need, not what has the most impressive demo.
+OttoRun is Brandible's AI automation for that recurring work: reception, content, and follow-up. There's no public price list. Scope is discussed with Brandible, and the workflow is chosen based on what you actually need, not what has the most impressive demo.
 
 For a lot of service businesses, the answer is simple: a widget that catches after-hours inquiries and an automatic reply that sets expectations. That's it. You don't need a customer service robot. You need a system that holds the lead until you can call back.
 
@@ -84,4 +84,4 @@ You don't need to automate your entire business. You need to stop losing warm le
 
 A chat widget that answers after hours. A text that goes out when a call isn't picked up. A follow-up that checks back in with someone who inquired and went quiet. That's a system most service businesses can have running in a week or two.
 
-If you want to see what that looks like for your business, [Brandible's AI and automation service](/services/ai/) is built for exactly this. It's the practical kind: fewer missed calls, faster replies, real follow-up. Not a technology project you have to manage yourself.
+If you want to see what that looks like for your business, [OttoRun](/services/ai/) is built for exactly this. It's the practical kind: fewer missed calls, faster replies, real follow-up. Not a technology project you have to manage yourself.

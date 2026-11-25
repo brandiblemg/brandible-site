@@ -103,7 +103,7 @@ The existing posts run roughly 550–800 words. That is a floor for voice, not a
 - Do not number “7 Tips” as the whole outline
 - Title: human, specific, no `| Brandible` suffix (the site already appends the brand). No keyword stuffing.
 
-Good titles sound like the service-page headlines: “Custom sites that convert.” “Practical AI that actually helps your business run.”
+Good titles sound like the service-page headlines: “Custom sites that convert.” “Let OttoRun it.”
 
 ---
 
@@ -117,7 +117,7 @@ Good titles sound like the service-page headlines: “Custom sites that convert.
   - Digital marketing $750–$3,000+/month
   - Branding $1,500–$5,000+
   - Media management $400–$1,500+/month
-  - AI & automation setup $750–$3,500+
+  - OttoRun: no public price list. Do not invent or reuse a setup range.
   - Ads: spend billed to the platform; management often $600 setup + 15% of spend (min ~$400–$500/month spend)
   - Month-to-month agreements, 30 days’ notice
   - The Doorstep Detailer: built from scratch, #1 relevant local result in Hunterdon County, 250+ customers, five-star feedback
@@ -169,7 +169,7 @@ On-brand CTA shapes:
 
 - “If the answer isn’t a confident yes, there’s a fix. [See how we build sites that convert →](/services/web-design/)”
 - “If you want this handled without living in Ads Manager, [book a free marketing call](/contact/#book-call).”
-- “We set up the practical kind — chat, follow-ups, after-hours. [See AI & Automation →](/services/ai/)”
+- “We set up the practical kind — calls, content, follow-ups. [See OttoRun →](/services/ai/)”
 
 Off-brand:
 

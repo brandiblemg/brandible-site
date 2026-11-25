@@ -18,7 +18,7 @@ Service URLs for CTAs:
 - Digital Marketing — `/services/digital-marketing/`
 - Branding — `/services/branding/`
 - Media Management — `/services/media-management/`
-- AI & Automation — `/services/ai/`
+- OttoRun — `/services/ai/`
 - Consult — `/contact/#book-call`
 
 ---
@@ -32,7 +32,7 @@ Service URLs for CTAs:
 | 03 | Your Google Business Profile Is Doing More Work Than Your Website | Commercial | Digital Marketing | High | queued |
 | 04 | Redesign or Rebuild? How to Know When Your Website Is Past Saving | Commercial | Web Design | High | queued |
 | 05 | Google Ads vs SEO for Local Businesses | Commercial | Digital Marketing | High | queued |
-| 06 | You’re Missing Calls After 5 PM. That’s an Operations Problem, Not a Marketing One | Commercial | AI & Automation | High | queued |
+| 06 | You’re Missing Calls After 5 PM. That’s an Operations Problem, Not a Marketing One | Commercial | OttoRun | High | queued |
 | 07 | Do You Still Need a Website If You Have a Strong Facebook Page? | Commercial | Web Design | High | queued |
 | 08 | How Long a Website Project Actually Takes (and What Slows It Down) | Commercial | Web Design | Medium | queued |
 | 09 | What Google Ads Really Cost a Small Business | Commercial | Digital Marketing | Medium | queued |
@@ -110,11 +110,11 @@ Service URLs for CTAs:
 ### 06 — You’re Missing Calls After 5 PM. That’s an Operations Problem, Not a Marketing One
 
 - **Proposed title:** You’re Missing Calls After 5 PM. That’s an Operations Problem, Not a Marketing One
-- **Primary service:** AI & Automation
+- **Primary service:** OttoRun
 - **Target reader:** Service business that pays for ads or has a decent site, then loses the lead overnight
 - **Search / user intent:** Problem-aware commercial. Missed calls, after-hours leads, website chat, follow-up automation
-- **Why Brandible should write it:** AI is a live service with no blog coverage. The AI page already speaks this language (“fewer missed calls, faster replies”). This topic is commercially sharp and hard to confuse with hype-y “AI for business” content.
-- **Natural CTA:** `/services/ai/` — chat, follow-ups, after-hours. Typical setup range is already public.
+- **Why Brandible should write it:** OttoRun is the live service for missed calls and follow-up. This topic is commercially sharp and hard to confuse with hype-y “AI for business” content.
+- **Natural CTA:** `/services/ai/` — OttoRun (OttoDesk, OttoBlog, OttoFollow). No public price list.
 - **Content type:** Commercial / problem-aware
 - **Priority:** High
 
@@ -290,10 +290,10 @@ Service URLs for CTAs:
 | Digital Marketing | 02, 03, 05, 09, 12, 14 |
 | Branding | 10, 18 |
 | Media Management | 11 (07 touches it) |
-| AI & Automation | 06 |
+| OttoRun | 06 |
 | Cross-service | 12, 17, 20 |
 
-If the first several published posts are all web design, pull the next one from Digital Marketing or AI on purpose.
+If the first several published posts are all web design, pull the next one from Digital Marketing or OttoRun on purpose.
 
 ---
 

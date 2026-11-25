@@ -157,6 +157,13 @@ body.modal-open{ overflow:hidden; }
     opacity 220ms ease-out;
 }
 .faq-open .faq-answer{ opacity: 1; }
+.faq-answer a {
+  color: #1D4ED8;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+.faq-answer a:hover { color: #0A1633; }
 
 @media (prefers-reduced-motion: reduce){
   .faq-answer{ transition: none !important; }
@@ -867,6 +874,139 @@ body.modal-open{ overflow:hidden; }
   border-top: 1px solid rgba(10, 22, 51, 0.12);
   color: #475569;
   line-height: 1.65;
+}
+
+/* OttoRun service page. Blue #1E3ABA is an accent on the logo plate and product cards only. */
+.svc-detail-hero-media.ottorun-hero-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.svc-detail-hero-media.ottorun-hero-visual img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0;
+  box-shadow: none;
+}
+.ottorun-logo {
+  width: min(100%, 22rem);
+  background: #fff;
+  border-radius: 0.875rem;
+  border-top: 4px solid #1E3ABA;
+  padding: 0.85rem 1.15rem 0.7rem;
+  box-shadow: 0 16px 40px rgba(3, 7, 18, 0.28);
+}
+.ottorun-mascot {
+  width: min(100%, 15.5rem);
+}
+.ottorun-products {
+  display: grid;
+  gap: 1.25rem;
+}
+@media (min-width: 768px) {
+  .ottorun-products {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+  }
+  .svc-process.svc-process--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.ottorun-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem 1.35rem 1.35rem;
+  background: #fff;
+  border: 1px solid rgba(10, 22, 51, 0.1);
+  border-top: 3px solid #1E3ABA;
+  border-radius: 0.875rem;
+}
+.ottorun-card-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
+  color: var(--brand-navy);
+}
+.ottorun-card-role {
+  margin: -0.35rem 0 0;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #1E3ABA;
+}
+.ottorun-card-pain,
+.ottorun-card-outcome,
+.ottorun-card p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.6;
+}
+.ottorun-card-outcome {
+  color: var(--brand-navy);
+  font-weight: 600;
+}
+.ottorun-card-link {
+  margin-top: auto;
+  padding-top: 0.35rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #1E3ABA;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+.ottorun-card-link:hover { color: var(--brand-navy); }
+.ottorun-note {
+  margin: 1.75rem 0 0;
+  max-width: 42rem;
+  color: #64748b;
+  line-height: 1.6;
+}
+.ottorun-faq {
+  display: grid;
+  border-top: 1px solid rgba(10, 22, 51, 0.1);
+}
+.ottorun-faq h3 {
+  margin: 0;
+  padding-top: 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+  color: var(--brand-navy);
+}
+.ottorun-faq p {
+  margin: 0.55rem 0 0;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(10, 22, 51, 0.1);
+  color: #475569;
+  line-height: 1.65;
+}
+a.ottorun-inline {
+  font-weight: 600;
+  color: #1E3ABA;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+a.ottorun-inline:hover { color: var(--brand-navy); }
+.svc-detail-hero a.ottorun-inline,
+.cta-band a.ottorun-inline {
+  color: #fff;
+}
+.svc-detail-hero a.ottorun-inline:hover,
+.cta-band a.ottorun-inline:hover {
+  color: #fdba74;
+}
+a.ottorun-inline:focus-visible,
+.ottorun-card-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
 }
 
 .svc-related-grid {
