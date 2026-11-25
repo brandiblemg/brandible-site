@@ -78,20 +78,18 @@
       "summary": "Done-for-you social content so the presence stays consistent."
     },
     "ai": {
-      "name": "AI & Automation",
+      "name": "OttoRun",
       "url": "/services/ai/",
       "cms_category": "Business Tips",
-      "price_display": "$750–$3,500+",
-      "price_note": "Brandible typical one-time setup range depending on complexity, with optional monthly support. Not a national average.",
+      "price_display": "",
+      "price_note": "No public price list. Do not invent or reuse a setup range.",
       "includes": [
-        "Discovery call to map where AI or automation will save time or catch leads",
-        "Tool selection and setup (chat, forms, email/SMS follow-up, or workflow tools)",
-        "Custom prompts, scripts, and routing rules",
-        "Team walkthrough",
-        "Optional monthly support"
+        "OttoDesk for reception and scheduling",
+        "OttoBlog for content and publishing",
+        "OttoFollow for lead follow-up and nurture"
       ],
-      "distinguish": "Missed-call texts, form auto-replies, and reminder sequences are automation. A chat that answers common questions can be AI. Do not call ordinary automation AI.",
-      "summary": "Practical after-hours catch and follow-up. Not a science project."
+      "distinguish": "OttoRun is Brandible's AI automation product line for calls, content, and follow-up. Do not publish a price.",
+      "summary": "Missed calls, unwritten blogs, and leads that go cold. Let OttoRun it."
     }
   },
   "core_pages": [

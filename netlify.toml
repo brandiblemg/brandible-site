@@ -136,6 +136,34 @@
   to = "/services/ai/"
   status = 301
 
+# OttoRun vanity aliases. Canonical URL stays /services/ai/.
+# Keep these with the other 301s, before the 200 rewrites.
+# Do not add these paths to the sitemap.
+
+[[redirects]]
+  from = "/ottorun"
+  to = "/services/ai/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ottorun/"
+  to = "/services/ai/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services/ottorun"
+  to = "/services/ai/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services/ottorun/"
+  to = "/services/ai/"
+  status = 301
+  force = true
+
 # ============================================
 # INTERNAL REWRITES (200 status - no redirect)
 # ============================================
